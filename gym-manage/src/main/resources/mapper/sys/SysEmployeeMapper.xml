@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysEmployeeDao">
+<mapper namespace="com.gym.dao.SysEmployeeDao">
 	<update id="updateObject">
 		update gym_emp set
 		name=#{name},
@@ -15,12 +15,12 @@
 		hiredate=#{hiredate}
 		where Id=#{Id}
 	</update>
-	<select id="findById" resultType="com.gy.pj.sys.entity.SysEmployee">
+	<select id="findById" resultType="com.gym.entity.SysEmployee">
 		select * from gym_emp
 		where Id=#{Id}
 	</select>
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysEmployee"
+		parameterType="com.gym.entity.SysEmployee"
            useGeneratedKeys="true "
             keyProperty="id">
 		insert into gym_emp
@@ -37,7 +37,7 @@
 		</foreach>
 	</delete>
 	<select id="findObject"
-		resultType="com.gy.pj.sys.entity.SysEmployee">
+		resultType="com.gym.entity.SysEmployee">
 		select *
 		from gym_emp
 		<include refid="queryWhereId" />
@@ -55,7 +55,7 @@
 			</if>
 		</where>
 	</sql>
-	<select id="findAllObject" resultType="com.gy.pj.sys.entity.SysEmployee">
+	<select id="findAllObject" resultType="com.gym.entity.SysEmployee">
 		select *
 		from gym_emp
 		order by id

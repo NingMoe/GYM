@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysClassDao">
+<mapper namespace="com.gym.dao.SysClassDao">
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysClass" useGeneratedKeys="true"
+		parameterType="com.gym.entity.SysClass" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into gym_class
 		(id,name,picUrl,description,coachId,price,number)
@@ -29,7 +29,7 @@
 
 
 	<update id="updateObject"
-		parameterType="com.gy.pj.sys.entity.SysClass">
+		parameterType="com.gym.entity.SysClass">
 		update gym_class
 		<set>
 			<if test="name!=null and name!=''">
@@ -57,7 +57,7 @@
 
 	<!-- 基于角色Name查询角色信息 -->
 	<select id="findObjectByName"
-		resultType="com.gy.pj.sys.entity.SysClass">
+		resultType="com.gym.entity.SysClass">
 		select id,name,picUrl,description,coachId,price,number
 		from
 		gym_class
@@ -65,7 +65,7 @@
 	</select>
 
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysClass">
+		resultType="com.gym.entity.SysClass">
 		select *
 		from gym_class
 		<include refid="queryWhereId" />

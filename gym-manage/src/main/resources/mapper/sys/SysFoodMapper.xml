@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysFoodDao">
+<mapper namespace="com.gym.dao.SysFoodDao">
 	<select id="findObject"
-		resultType="com.gy.pj.sys.entity.SysFood">
+		resultType="com.gym.entity.SysFood">
 		select *
 		<include refid="queryWhereId" />
 		order by id desc
@@ -19,7 +19,7 @@
 	</delete>
 	
 	<insert id="insertObjects"
-		parameterType="com.gy.pj.sys.entity.SysFood" useGeneratedKeys="true"
+		parameterType="com.gym.entity.SysFood" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into gym_foods
 		(id,food,heat,protein,carbo,axunge,chol,vitamin,scope)
@@ -39,7 +39,7 @@
 	where id=#{id}
 	</update>
 	
-	<select id="findfoodsAndHeat" resultType="com.gy.pj.common.vo.Node">
+	<select id="findfoodsAndHeat" resultType="com.gym.vo.Node">
 	select food,heat,carbo from gym_foods
 	</select>
 	
