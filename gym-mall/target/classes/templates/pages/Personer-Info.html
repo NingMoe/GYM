@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="../css/unlogin-top.css"/>
+		<link rel="stylesheet" href="../css/basicinfo.css"/>
+		<link rel="stylesheet" href="../css/LoginPage-top.css"/>
+	</head>
+	<body>
+		<div class="o-hiyd">
+		
+		<!--  ？？？ -->
+			<script>SITE_URL = "/";</script>
+		
+			<script src="hijs2.js"></script>
+			<!-- <div class="o-header2">
+	    		<div class="o-header2_inner">
+	    			<a href="./HomePage.html" class="o-header_logo">
+		    			logo背景图片
+	           			<img src="../img/logo.jpg"/width="5%">
+	        		</a>
+	        		<div class="o-header2-nav">
+				        		<div data-hicms-tmpl="hiyd-nav">        
+									<div data-hicms-tmpl="hiyd-nav">
+										<div>
+											<a href="./FitnessClass.html" target='_self' class="item">特色课程</a>
+											<a href="./Coach.html" target='_self' class="item">优质教练</a>
+											<a href="./FoodPage.html" target='_self' class="item">健身饮食</a>
+											<a href="./EquipmentPage.html" target='_self' class="item">健身器材</a>
+											<a href="./CommentsPage.html" target='_self' class="item">社区精选</a>
+											<a href="./huodong.html" target='_self' class="item">近期活动</a>
+										</div>
+									</div>
+								</div>
+	        	<div class="user menu item">
+	                <a href="../UserPage/Personer-Info.html" class="name">
+	                	<span class="avatar">
+		               	右上角头像图标
+		               		<img src="../img/avatar-default.jpg" alt="">
+		           		</span>
+	                   	乐乐咯
+	         		</a>
+	         		<a href="../UserPage/HomePage.html" class="exit">[退出]</a>
+	        	</div>
+		     			</div>
+
+				</div>
+			</div> -->
+			<div th:replace="~{topPage :: topbar}"></div> 
+
+			<!-- main -->
+			<div class="o-personal page">
+            	<div class="inner">
+                	<!-- 面包屑导航{ -->
+                	<div class="mod-crumbs">
+                    	<span>当前位置：</span>
+	                	<a class="back-to-index" title="健身" href="../UserPage/HomePage.html">健身</a><span class="arrow">»</span>
+						<a class="back-to-index" href="../UserPage/Personer-Info.html">个人中心</a><span class="arrow">»</span>
+                    	<b>基本资料</b>
+                	</div>
+               		<!-- }面包屑导航 -->
+                	<div class="o-personal-bd">
+                    	<div class="col-main">
+                        	<div class="o-user-form base-profile">
+                           		<form id="formEdit" method="post" enctype="multipart/form-data" action="/personal/UpdateProfile" target="ifEdit">
+                                <div class="line">
+                                    <span class="label">头像</span>
+                                    <div class="cont">
+                                        <div class="u-head-update">
+                                            <div id="avatar-preview" class="preview"><img src="../img/avatar-default.jpg" alt=""></div>
+                                            <input type="file" id="head" name="head">
+                                            <a href="#..." class="update">上传头像</a>
+                                        </div>
+                                        <div class="form-note"></div>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <span class="label">昵称</span>
+                                    <div class="cont">
+                                        <div class="input-text">
+                                            <input class="nick-name" name="nick" title="昵称" type="text" value="乐乐咯">    
+                                        </div>
+                                        <div class="form-note"></div>
+                                    </div>
+                                </div>
+                                <div class="line">
+                                    <span class="label">性别</span>
+                                        <div class="cont">
+                                            <span class="raido"><input type="radio" title="性别" value="1" name="gender">男</span>
+                                            <span class="raido"><input type="radio" title="性别" value="2" name="gender">女</span>
+                                            <div class="form-note"></div>
+                                        </div>
+                                </div>
+                                <div class="action">
+                                    <a href="javascript:void(0)" class="u-button save">保存</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-aside">
+                        <div class="o-personal-nav">
+                            <ul>
+                                <li class="cur"><a href="./Personer-Inof.html"><em><i></i>基本资料</em></a></li>
+								<li><a href="./Personer-Com.html"><em><i></i>我要留言</em></a></li>
+								<li><a href="./Personer-Accou.html"><em><i></i>账号设置</em></a></li>
+								<li><a href="./Personer-Marked.html"><em><i></i>我的收藏</em></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--底部的东西-->
+			<div class="o-hiyd-footer">
+				<div class="o-footer-row">
+					<a class="footer-nav-link" href="https://www.11467.com/qiye/35839987.htm" target='_blank'>关于偶家</a>|
+					<span>Copyright (C) 2019 www.hiyd.com 版权所有 广州市偶家科技有限公司</span>
+				</div>
+				<div class="o-footer-row">
+					<span>粤网文（2015）1655-286号</span> | <span>粤ICP备15035085号-3</span>
+				</div>
+			</div>
+	</body>
+</html>

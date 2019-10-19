@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+<head>
+<meta charset="UTF-8">
+<title>欢迎页面-X-admin2.2</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+<link rel="stylesheet" href="./css/font.css">
+<link rel="stylesheet" href="./css/xadmin.css">
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+	<div class="x-nav">
+		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
+			<a> <cite>导航元素</cite></a>
+		</span> <a class="layui-btn layui-btn-small"
+			style="line-height: 1.6em; margin-top: 3px; float: right"
+			onclick="location.reload()" title="刷新"> <i
+			class="layui-icon layui-icon-refresh" style="line-height: 30px"></i></a>
+	</div>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<!--  <div class="layui-card-body ">
+                            <form class="layui-form layui-col-space5">
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                                </div>
+                            </form>
+                        </div> -->
+					<div class="layui-card-header" id="gymButton">
+						<button class="layui-btn layui-btn-danger" id="deleteById">
+							<i class="layui-icon"></i>删除
+						</button>
+						<button class="layui-btn"
+							onclick="xadmin.open('添加组','./gym_coachGroup_add.html',400,300)">
+							<i class="layui-icon"></i>添加
+						</button>
+						<button class="layui-btn" id="edit">
+							<i class="layui-icon"></i>修改
+						</button>
+						<div class="layui-inline layui-show-xs-block" id="query"
+							style="float: right">
+							<button class="layui-btn" id="queryById" lay-submit=""
+								lay-filter="sreach">
+								<i class="layui-icon">&#xe615;</i>
+							</button>
+						</div>
+						<div class="layui-inline layui-show-xs-block"
+							style="float: right; margin-top: 7px;">
+							<input type="text" name="username" placeholder="请输入用户名"
+								autocomplete="off" class="layui-input" id="searchNameId">
+						</div>
+					</div>
+					<div class="layui-card-body ">
+						<table class="layui-table layui-form">
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="" lay-skin="primary">
+									</th>
+									<th>用户名</th>
+									<th>部门</th>
+									<th>邮箱</th>
+									<th>手机号</th>
+									<th>创建时间</th>
+									<th>修改时间</th>
+									<th>状态</th>
+									<th>操作</th>
+							</thead>
+							<tbody id="tbodyId">
+								<tr>
+									<td colspan="9">数据正在加载中...</td>
+								</tr>
+								<!-- <tr>
+                                  <td>
+                                    <input type="checkbox" name=""  lay-skin="primary">
+                                  </td>
+                                  <td>1</td>
+                                  <td>admin</td>
+                                  <td>18925139194</td>
+                                  <td>113664000@qq.com</td>
+                                  <td>超级管理员</td>
+                                  <td>2017-01-01 11:11:42</td>
+                                  <td class="td-status">
+                                    <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                  <td class="td-manage">
+                                    <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                      <i class="layui-icon">&#xe601;</i>
+                                    </a>
+                                    <a title="编辑"  onclick="xadmin.open('编辑','admin-edit.html')" href="javascript:;">
+                                      <i class="layui-icon">&#xe642;</i>
+                                    </a>
+                                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                      <i class="layui-icon">&#xe640;</i>
+                                    </a>
+                                   <span class="layui-btn layui-btn-normal layui-btn-mini">禁用</span>
+                                  </td>
+                                </tr> -->
+							</tbody>
+						</table>
+					</div>
+					<div class="layui-card-body ">
+						<div class="page">
+							<div id="pageId">
+								<!-- <a class="prev" href="">&lt;&lt;</a> <a class="num" href="">1</a>
+								<span class="current">2</span> <a class="num" href="">3</a> <a
+									class="num" href="">489</a> <a class="next" href="">&gt;&gt;</a> -->
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li><a class="first">首页</a></li>
+									<li><a class="pre">上一页</a></li>
+									<li><a class="next">下一页</a></li>
+									<li><a class="last">尾页</a></li>
+									<li><a class="rowCount">总记录数(0)</a></li>
+									<li><a class="pageCount">总页数(0)</a></li>
+									<li><a class="pageCurrent">当前页(1)</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	layui.use([ 'laydate', 'form' ], function() {
+		var laydate = layui.laydate;
+		var form = layui.form;
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#start' //指定元素
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#end' //指定元素
+		});
+	});
+	/*用户-停用*/
+	/* function member_stop(obj,id){
+	    layer.confirm('确认要停用吗？',function(index){
+
+	        if($(obj).attr('title')=='启用'){
+
+	          //发异步把用户状态进行更改
+	          $(obj).attr('title','停用')
+	          $(obj).find('i').html('&#xe62f;');
+
+	          $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+	          layer.msg('已停用!',{icon: 5,time:1000});
+
+	        }else{
+	          $(obj).attr('title','启用')
+	          $(obj).find('i').html('&#xe601;');
+
+	          $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+	          layer.msg('已启用!',{icon: 5,time:1000});
+	        }
+	        
+	    });
+	} */
+	$(function() {
+		doGetObjects();
+		$("#query").on("click", "#queryById", doQueryObjects);
+		$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+		$("#tbodyId").on("click", "#operation", doValidById)
+	})
+	function doValidById() {
+		debugger
+		//1.获取对象id,validId的值
+		var rowData=$(this).parent().parent().children("#UserId");
+	   var id=rowData.children(".cBox").val();
+	   var Valid=$(this).parent().parent().children("#valid");
+	   var newValid=Valid.text();
+	   var a="禁用";
+	   var valid=newValid==a?0:1;
+	   var params={"id":id,"valid":valid};
+		//2.构建url,参数对象
+		var url = "user/doValidById";
+		var params = {
+			"id" : id,
+			"valid" : valid ? 0 : 1
+		}
+		//3.发送异步请求,更新数据
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				doGetObjects();//一种刷新方式
+				//doEditRow(layui-btn, valid ? 0 : 1);//一种局部刷新方式
+			} else {
+				alert(result.message);
+			}
+		})
+	}
+	function doEditRow(btn, valid) {
+		//1.修改按钮上内容
+		btn.html(valid ? "禁用" : "启用");
+		//2.修改td中元素内容
+		var tr = btn.parents("tr");
+		tr.find("td:eq(5)").html(valid ? "启用" : "禁用");
+		//3.修改并重新绑定数据
+		var sysUser = tr.data("sysUser");
+		sysUser.valid = valid;
+		tr.data("sysUser", sysUser);
+	}
+	function doJumpToPage() {
+		debugger
+		//1.获取点击对象的class值
+		var cls = $(this).prop("class");//Property
+		//2.基于点击的对象执行pageCurrent值的修改
+		//2.1获取pageCurrent,pageCount的当前值
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var pageCount = $("#pageId").data("pageCount");
+		//2.2修改pageCurrent的值
+		if (cls == "first") {//首页
+			pageCurrent = 1;
+		} else if (cls == "pre" && pageCurrent > 1) {//上一页
+			pageCurrent--;
+		} else if (cls == "next" && pageCurrent < pageCount) {//下一页
+			pageCurrent++;
+		} else if (cls == "last") {//最后一页
+			pageCurrent = pageCount;
+		} else {
+			return;
+		}
+		//3.对pageCurrent值进行重新绑定
+		$("#pageId").data("pageCurrent", pageCurrent);
+		//4.基于新的pageCurrent的值进行当前页数据查询
+		doGetObjects();
+	}
+	function doQueryObjects() {
+		debugger
+		$("#pageId").data("pageCurrent", 1);
+		doGetObjects();
+	}
+	function doGetObjects() {
+		//debugger;//断点调试
+		//1.定义url和参数
+		debugger
+		var url = "user/doFindPageObjects"
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent
+		};//pageCurrent=2
+		//为什么此位置要获取查询参数的值?
+		//一种冗余的应用方法，目的时让此函数在查询时可以重用。
+		var username = $("#searchNameId").val();
+		//如下语句的含义是什么？动态在js对象中添加key/value,
+		if (username)
+			params.username = username;//查询时需要
+		$.getJSON(url, params, function(result) {
+			debugger
+			//JsonResult->PageObject->List<SysLogs>+...
+			//请问result是一个字符串还是json格式的js对象？对象
+			doHandleResponseResult(result);
+		});//特殊的ajax函数
+	}
+	function doHandleResponseResult(result) { //JsonResult
+		if (result.state == 1) {//ok
+			//更新table中tbody内部的数据
+			doSetTableBodyRows(result.data.list);//将数据呈现在页面上 
+			//更新页面page.html分页数据
+			doSetPagination(result.data); //此方法写到page.html中
+		} else {
+			alert(result.message);
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			doSetPagination(result.data);
+		}
+	}
+	function doSetPagination(page) {
+		//1.初始化数据
+		$(".rowCount").html("总记录数(" + page.total + ")");
+		$(".pageCount").html("总页数(" + page.pages + ")");
+		$(".pageCurrent").html("当前页(" + page.pageNum + ")");
+		//2.绑定数据(为后续对此数据的使用提供服务)
+		$("#pageId").data("pageCurrent", page.pageNum);
+		$("#pageId").data("pageCount", page.pages);
+	}
+	function doSetTableBodyRows(records) {
+		//1.获取tbody对象，并清空对象
+		var tBody = $("#tbodyId");
+		tBody.empty();
+		//2.迭代records记录，并将其内容追加到tbody
+		for ( var i in records) {
+			//2.1 构建tr对象
+			var tr = $("<tr></tr>");
+			//2.2 构建tds对象
+			var tds = doCreateTds(records[i]);
+			//2.3 将tds追加到tr中
+			tr.append(tds);
+			//2.4 将tr追加到tbody中
+			tBody.append(tr);
+		}
+	}
+	function doCreateTds(data) {
+		var tds = "<td id='UserId'><input type='checkbox' class='cBox' name='id' value='"+data.id+"' lay-skin='primary'></td>"
+				+ "<td id='username'>"
+				+ data.username
+				+ "</td>"
+				+ "<td id='deptId'>"
+				+ data.deptId
+				+ "</td>"
+				+ "<td id='email'>"
+				+ data.email
+				+ "</td>"
+				+ "<td id='mobile'>"
+				+ data.mobile
+				+ "</td>"
+				+ "<td id='createdTime'>"
+				+ new Date(data.createdTime).toLocaleString()
+				+ "</td>"
+				+ "<td id='modifiedTime'>"
+				+ new Date(data.modifiedTime).toLocaleString()
+				+ "</td>"
+				+ "<td id='valid'>"
+				+ (data.valid ? "启用" : "禁用")
+				+ "</td>"
+				+ "<td><button type='button' class='layui-btn layui-btn-normal layui-btn-mini' id='operation'>"
+				+ (data.valid ? "禁用" : "启用") + "</button></td>";
+		return tds;
+	}
+</script>
+<!-- <script>var _hmt = _hmt || []; (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();</script> -->
+</html>

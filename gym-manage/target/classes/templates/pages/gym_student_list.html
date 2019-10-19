@@ -1,0 +1,333 @@
+<!doctype html>
+<html class="x-admin-sm">
+<head>
+<meta charset="UTF-8">
+<title>欢迎页面-X-admin2.2</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/xadmin.css">
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+	<div class="x-nav">
+		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
+			<a> <cite>导航元素</cite></a>
+		</span> <a class="layui-btn layui-btn-small"
+			style="line-height: 1.6em; margin-top: 3px; float: right"
+			onclick="location.reload()" title="刷新"> <i
+			class="layui-icon layui-icon-refresh" style="line-height: 30px"></i></a>
+	</div>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<!-- <div class="layui-card-body ">
+						<form class="layui-form layui-col-space5">
+							<div class="layui-inline layui-show-xs-block">
+								<button class="layui-btn" lay-submit="" lay-filter="sreach">
+									<i class="layui-icon">&#xe615;</i>
+								</button>
+							</div>
+						</form>
+					</div> -->
+					<div class="layui-card-header" id="gymButton">
+						<button class="layui-btn layui-btn-danger" id="deleteById">
+							<i class="layui-icon"></i>批量删除
+						</button>
+						<button class="layui-btn"
+							onclick="xadmin.open('添加用户','./gym_student_add.html',350,400)">
+							<i class="layui-icon"></i>添加
+						</button>
+						<button class="layui-btn" id="edit">
+							<i class="layui-icon"></i>修改
+						</button>
+						<div class="layui-inline" id="query"
+							style="float: right">
+							<button class="layui-btn" id="queryById" lay-submit=""
+								lay-filter="sreach">
+								<i class="layui-icon">&#xe615;</i>
+							</button>
+						</div>
+						<div class="layui-inline"
+							style="float: right; margin-top: 7px;">
+							<input type="text" name="username" placeholder="请输入学员名称"
+								autocomplete="off" class="layui-input" id="searchNameId">
+						</div>
+					</div>
+					<div class="layui-card-body">
+						<table class="layui-table layui-form">
+							<thead>
+								<tr>
+									<th><input type="checkbox" lay-filter="checkall" name=""
+										lay-skin="primary"></th>
+									<th>ID</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>年龄</th>
+									<th>身高(cm)</th>
+									<th>体重(kg)</th>
+									<th>手机号码</th>
+									<th>E-mail</th>
+									<th>地址</th>
+									<th>加入时间</th>
+								</tr>
+							</thead>
+							<tbody id="tbodyId">
+								<tr>
+									<td colspan="11">数据正在加载中...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="layui-card-body ">
+						<div class="page">
+							<div id="pageId">
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li><a class="first">首页</a></li>
+									<li><a class="pre">上一页</a></li>
+									<li><a class="next">下一页</a></li>
+									<li><a class="last">尾页</a></li>
+									<li><a class="rowCount">总记录数(0)</a></li>
+									<li><a class="pageCount">总页数(0)</a></li>
+									<li><a class="pageCurrent">当前页(1)</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	layui.use([ 'laydate', 'form' ], function() {
+		var laydate = layui.laydate;
+		var form = layui.form;
+
+		// 监听全选
+		form.on('checkbox(checkall)', function(data) {
+			if (data.elem.checked) {
+				$('tbody input').prop('checked', true);
+			} else {
+				$('tbody input').prop('checked', false);
+			}
+			form.render('checkbox');
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#start' //指定元素
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#end' //指定元素
+		});
+	});
+
+	$(function() {
+		doGetObjects();
+		$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+		$(".layui-inline").on("click", ".layui-btn", doQueryObjects)
+		$("#gymButton").on("click", "#deleteById",doDeleteObjects)
+		$("#gymButton").on("click", "#edit", doEditUI);
+	});
+	
+	function doEditUI() {
+		//获取选中的记录数据
+		var ids = doGetCheckedId();
+		if (ids==null) {
+			alert("请选择一个");
+			$("#edit").removeAttr("onclick");
+			return;
+		}
+		xadmin.open('修改组','./gym_student_edit.html',350,400)
+	}
+	
+	function doGetCheckedId() {
+		var array;
+		$("#tbodyId input[type=checkbox]").
+		each(function() {
+			if ($(this).prop("checked")) {
+				array=$(this).val();
+				localStorage.setItem('array',array);
+			}
+		});
+		return array;
+	}
+	
+	/*执行删除操作*/
+	function doDeleteObjects() {
+		//1.获取选中的id值
+		var ids = doGetCheckedIds();
+		if (ids.length == 0) {
+			alert("至少选择一个");
+			return;
+		}
+		if (!confirm("确认删除吗?"))
+			return;
+		//2.发异步请求执行删除操作
+		var url = "Student/doDeleteObjects";
+		var params = {
+			"ids" : ids.toString()
+		};
+		console.log(params);
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				doGetObjects();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+
+	function doGetCheckedIds() {
+		var array = [];//new Array();
+		$("#tbodyId input[type=checkbox]").each(function() {
+			if ($(this).prop("checked")) {
+				array.push($(this).val());
+			}
+		});
+		return array;
+	}
+
+	function doChangeTHeadCheckBoxState() {
+		var flag = true;
+		$("#tbodyId input[name='cItem']").each(function() {
+			flag = flag & $(this).prop("checked")
+		});
+		$("#checkAll").prop("checked", flag);
+	}
+
+	/*实现全选操作*/
+	function doChangeTBodyCheckBoxState() {
+		var flag = $(this).prop("checked");//true or false
+		$("#tbodyId input[type='checkbox']").prop("checked", flag);
+	}
+
+	function doSetPageCurrent() {
+		var pageCount = $("#pageId").data("pageCount");
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var checked = $("#checkAll").prop("checked");
+		if (pageCurrent == pageCount && checked && pageCurrent > 1) {
+			pageCurrent--;
+			$("#pageId").data("pageCurrent", pageCurrent);
+		}
+	}
+
+	function doQueryObjects() {
+		debugger
+		$("#pageId").data("pageCurrent", 1);
+		doGetObjects();
+	}
+
+	function doJumpToPage() {
+		var cls = $(this).prop("class");//property
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var pageCount = $("#pageId").data("pageCount");
+		if (cls == "first" && pageCurrent != 1) {
+			pageCurrent = 1;
+		} else if (cls == "pre" && pageCurrent > 1) {
+			pageCurrent--;
+		} else if (cls == "next" && pageCurrent < pageCount) {
+			pageCurrent++;
+		} else if (cls == "last") {
+			pageCurrent = pageCount;
+		} else {
+			return;
+		}
+		$("#pageId").data("pageCurrent", pageCurrent);
+		doGetObjects();
+	}
+	
+	function doGetObjects() {
+		$("#checkAll").prop("checked", false);
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent
+		};
+		var uname = $("#searchNameId").val();
+		if (uname)
+			params.name = uname;
+		var url = "Student/doFindPageObjects"
+		$.getJSON(url, params, function(result) {
+			doHandleResponseResult(result);
+		});
+	}
+	
+	function doHandleResponseResult(result) {
+		debugger
+		if (result.state == 1) {//ok
+			doSetTableBodyRows(result.data.list);
+			doSetPagination(result.data);
+		} else {
+			alert(result.msg);
+		}
+	}
+	
+	function doSetTableBodyRows(records) {
+		var tBody = $("#tbodyId");
+		tBody.empty();
+		for ( var i in records) {
+			var tr = $("<tr></tr>");
+			var tds = doCreateTds(records[i]);
+			tr.append(tds);
+			tBody.append(tr);
+		}
+	}
+	
+	function doSetPagination(pageObject) {
+		$(".rowCount").html("总记录数(" + pageObject.total + ")");
+		$(".pageCount").html("总页数(" + pageObject.pages + ")");
+		$(".pageCurrent").html("当前页(" + pageObject.pageNum + ")");
+		
+		$("#pageId").data("pageCurrent", pageObject.pageNum);
+		$("#pageId").data("pageCount", pageObject.pages);
+	}
+
+	function doCreateTds(data) {
+		var tds = "<td><input type='checkbox' name='id' lay-skin='primary' value='"+data.id+"'></td>"
+				+ "<td>"
+				+ data.id
+				+ "</td>"
+				+ "<td>"
+				+ data.name
+				+ "</td>"
+				+ "<td>"
+				+ data.gender
+				+ "</td>"
+				+ "<td>"
+				+ data.age
+				+ "</td>"
+				+ "<td>"
+				+ data.height
+				+ "</td>"
+				+ "<td>"
+				+ data.weight
+				+ "</td>"
+				+ "<td>"
+				+ data.phoneNumber
+				+ "</td>"
+				+ "<td>"
+				+ data.email
+				+ "</td>"
+				+ "<td>"
+				+ data.address
+				+ "</td>"
+				+ "<td>"
+				+ data.createdTime + "</td>";
+		return tds;
+	}
+</script>
+</html>

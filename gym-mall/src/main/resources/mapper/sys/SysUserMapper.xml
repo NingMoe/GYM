@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gy.pj.sys.dao.SysUserDao">
+	<insert id="insertObject"
+		parameterType="com.gy.pj.sys.entity.SysUser" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into gym_user
+		(id,username,password,sex,icon,email,intro)
+		values
+		(#{id},#{username},#{password},#{sex},#{icon},#{email},#{intro})
+	</insert>
+
+	<delete id="deleteObject" parameterType="int">
+		delete
+		from gym_user
+		where id=#{id}
+	</delete>
+	<delete id="deleteObjects">
+		delete from gym_user
+		where id in
+		<!-- 这里的collection值是之前注解parm定义的 -->
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="id">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<update id="updateObject"
+		parameterType="com.gy.pj.sys.entity.SysUser">
+		update gym_user <!-- set sex=#{sex},icon=#{icon},email=#{email},intro=#{intro} where id=#{id} -->
+		<set>
+			<if test="sex!=null and sex!=''">
+				sex=#{sex},
+			</if>
+			<if test="icon!=null and icon!=''">
+				icon=#{icon},
+			</if>
+			<if test="email!=null and email!=''">
+				email=#{email},
+			</if>
+			<if test="intro!=null and intro!=''">
+				intro=#{intro},
+			</if>	
+		</set> 
+		where id=#{id}
+	</update>
+
+
+	<!-- 基于角色Name查询角色信息 -->
+	<select id="findObjectByUsername"
+		resultType="com.gy.pj.sys.entity.SysUser">
+		select id,username,password,sex,icon,email,intro
+		from
+		gym_user
+		where username=#{username}
+	</select>
+
+	<select id="findPageObjects"
+		resultType="com.gy.pj.sys.entity.SysUser">
+		select *
+		from gym_user
+		<include refid="queryWhereId" />
+		<!-- order by createdTime desc -->
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		from gym_user
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="username!=null and username!=''">
+				username like concat("%",#{username},"%")
+			</if>
+		</where>
+	</sql>
+	
+
+</mapper>

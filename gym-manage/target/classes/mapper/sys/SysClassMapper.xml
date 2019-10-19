@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gy.pj.sys.dao.SysClassDao">
+	<insert id="insertObject"
+		parameterType="com.gy.pj.sys.entity.SysClass" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into gym_class
+		(id,name,picUrl,description,coachId,price,number)
+		values
+		(#{id},#{name},#{picUrl},#{description},#{coachId},#{price},#{number})
+	</insert>
+
+	<delete id="deleteObject" parameterType="int">
+		delete
+		from gym_class
+		where id=#{id}
+	</delete>
+	<delete id="deleteObjects">
+		delete from gym_class
+		where id in
+		<!-- 这里的collection值是之前注解parm定义的 -->
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="id">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<update id="updateObject"
+		parameterType="com.gy.pj.sys.entity.SysClass">
+		update gym_class
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="picUrl!=null and picUrl!=''">
+				picUrl=#{picUrl},
+			</if>
+			<if test="description!=null and description!=''">
+				description=#{description},
+			</if>
+			<if test="coachId!=null and coachId!=''">
+				coachId=#{coachId},
+			</if>
+			<if test="price!=null and price!=''">
+				price=#{price},
+			</if>
+			<if test="number!=null and number!=''">
+				number=#{number},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+
+
+	<!-- 基于角色Name查询角色信息 -->
+	<select id="findObjectByName"
+		resultType="com.gy.pj.sys.entity.SysClass">
+		select id,name,picUrl,description,coachId,price,number
+		from
+		gym_class
+		<include refid="queryWhereId" />
+	</select>
+
+	<select id="findPageObjects"
+		resultType="com.gy.pj.sys.entity.SysClass">
+		select *
+		from gym_class
+		<include refid="queryWhereId" />
+		<!-- order by createdTime desc -->
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		from gym_class
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="name!=null and name!=''">
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+
+</mapper>

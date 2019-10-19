@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="renderer" content="webkit" />
+<meta name="applicable-device" content="pc">
+<base target="_blank" />
+<title>Hi运动健身网-合理健身增肌、健康减肥瘦身、科学饮食运动</title>
+<link rel="stylesheet" href="../css/LoginPage.css" />
+<script src="./js/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="o-hiyd">
+		<div class="o-header2">
+			<div class="o-header2_inner">
+				<a href="./HomePage.html" class="o-header_logo"> <img
+					src="../img/Logo.PNG" />
+				</a>
+				<div class="o-header2-nav">
+					<div data-hicms-tmpl="hiyd-nav">
+						<div data-hicms-tmpl="hiyd-nav">
+							<div>
+								<a href="./FitnessClass.html" target='_self' class="item">特色课程</a>
+								<a href="./Coach.html" target='_self' class="item">优质教练</a> <a
+									href="./FoodPage.html" target='_self' class="item">健身饮食</a> <a
+									href="./EquipmentPage.html" target='_self' class="item">健身器材</a>
+								<a href="./CommentsPage.html" target='_self' class="item">社区精选</a>
+								<a href="./huodong.html" target='_self' class="item">近期活动</a>
+							</div>
+						</div>
+					</div>
+					<div class="user menu item">
+						<a href="./Personer-Info.html" class="name"> 
+						<span class="avatar">
+							<img src="" alt="">  
+						</span> name
+						</a> <a href="./HomePage.html" class="exit">[退出]</a>
+					</div>
+				</div>
+				<div class="o-header_ctrl"></div>
+			</div>
+			
+		
+		</div>
+		<!-- <div th:replace="~{topPage :: topbar}"></div>  -->
+
+		<div class="o-regist2">
+			<div class="setion-hd">
+				<h2 class="setion-title">
+					<i class="icon_hiyd"></i><span class="title-font">登录</span>
+				</h2>
+			</div>
+			<div class="section-bd">
+				<!-- <form action="" id="formRegister"> -->
+					<div class="form-info formRegister" id="form-mobile">
+						<label><i class="icon_phone"></i>用户名</label><br /> <span
+							class="phone-wrap"> <input id="account" class="info-text"
+							placeholder="请输入您的用户名" type="text">
+							<div></div> <i class="icon_right"></i> <i class="icon_notice"></i>
+						</span>
+						<p class="text-notice">请输入长度为6-20个字符的用户 名</p>
+					</div>
+					<!-- <div class="form-info" id="form-VCode">
+                    <label><i class="icon_msg"></i>短信验证码</label><br/>
+                    <span class="phone-wrap">
+                        <input id="VCode" class="info-text" data-length="(4,6)" placeholder="输入短信验证码" 
+
+type="text"><div></div>
+                        <i class="icon_notice"></i>
+                    </span>
+                    <p class="text-notice"></p>
+                </div> -->
+					<div class="form-info" id="form-pwd">
+						<label><i class="icon_psw"></i>密码</label><br /> <span
+							class="phone-wrap"> <input id="pwd" class="info-text"
+							placeholder="输入密码" data-length="(6,20)" type="password"
+							error_msg="请输入六字以上">
+						<div></div> <i class="icon_right"></i> <i class="icon_notice"></i>
+						</span>
+						<p class="text-notice">请输入长度为6-20个字符的密码</p>
+					</div>
+
+					<div class="form-info" id="form-imageVCode" style="display: none;">
+						<label><i class="icon_pic"></i>图形验证码 </label><br /> <span
+							class="phone-wrap"> <input id="imageVCode"
+							class="info-text info-v-pic" placeholder="输入图形验证码" type="text">
+						<div></div> <img id="img_verify" class="img-btn"
+							src="https://www.hiyd.com/account/Verify?code=702206" alt="图形验证码"
+							style="width: 140px; height: 42px;"> <!-- <a id="getVCode" class="v-code-btn enable" 
+
+href="javascript:;">获取验证码</a> -->
+						</span>
+						<p class="text-notice"></p>
+					</div>
+					<button id="login" class="next-btn">登录
+
+					</button>
+					<a class="tip-msg tip-msg2 o-regist_login" href="./HomePage.html">忘记密码</a>
+					<a class="tip-msg tip-msg2 o-regist_login" href="./HomePage.html">新用户注册</a>
+					<div class="other-login">
+						<div class="other-login_hd">
+							<h3>使用第三方账号登录</h3>
+						</div>
+						<div class="other-login_bd">
+							<span class="login-qq" title="QQ登
+
+录"></span> <span
+								class="login-wx" title="微信登
+
+录"></span> <span class="login-wb"
+								title="新浪微博登
+
+录"></span>
+						</div>
+					</div>
+				<!-- </form> -->
+			</div>
+		</div>
+		<!--底部的东西-->
+		<div class="o-hiyd-footer">
+			<div class="o-footer-row">
+				<a class="footer-nav-link"
+					href="https://www.11467.com/qiye/35839987.htm" target='_blank'>关于偶家</a>|
+				<span>Copyright (C) 2019 www.hiyd.com 版权所有 广州市偶家科技有限公 司</span>
+			</div>
+			<div class="o-footer-row">
+				<span>粤网文（2015）1655-286号</span> | <span>粤ICP备15035085号- 3</span>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>	
+		$(function() {
+			debugger
+			$("#login").on("click", doLogin);
+		});
+		
+		function doLogin() {
+			debugger
+			var account=$("#account").val();
+			var pass=$("#pwd").val();
+			var url = "Account/loginPage";
+			var params={"account":account,"pass":pass};
+			//var a = session.getAttribute("account");
+			$.post(url, params, function(result) {
+				if(result.state>0){
+					localStorage.setItem("account",result.message);
+					localStorage.setItem("state",1);
+					window.location.href="HomePage.html";
+				}
+				else
+					alert("账号或密码错误");
+			});
+		
+		}
+		
+		/* function doSetResult(result) {
+			debugger
+			var Ohs = document.getElementById("formRegister");
+			var text = Ohs.getElementsByTagName('account');
+				text.innerText = result.data.records.account;
+		} */
+	</script>
+</html>

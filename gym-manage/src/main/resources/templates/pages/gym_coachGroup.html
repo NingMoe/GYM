@@ -1,0 +1,332 @@
+<!doctype html>
+<html class="x-admin-sm">
+<head>
+<meta charset="UTF-8">
+<title>欢迎页面-X-admin2.2</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/xadmin.css">
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!--[if lt IE 9]>
+          <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+          <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+	<div class="x-nav">
+		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">教练管理</a>
+			<a> <cite>教练组列表</cite></a>
+		</span> <a class="layui-btn layui-btn-small"
+			style="line-height: 1.6em; margin-top: 3px; float: right"
+			onclick="location.reload()" title="刷新"> <i
+			class="layui-icon layui-icon-refresh" style="line-height: 30px"></i></a>
+	</div>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+
+					<!-- <form class="layui-form layui-col-space5"> -->
+					<!-- <div class="layui-inline layui-show-xs-block">
+								<input class="layui-input" autocomplete="off" placeholder="开始日"
+									name="start" id="start">
+							</div>
+							<div class="layui-inline layui-show-xs-block">
+								<input class="layui-input" autocomplete="off" placeholder="截止日"
+									name="end" id="end">
+							</div> -->
+
+
+					<!-- </form> -->
+
+					<div class="layui-card-header" id="gymButton">
+						<button class="layui-btn layui-btn-danger" id="deleteById">
+							<i class="layui-icon"></i>删除
+						</button>
+						<button class="layui-btn"
+							onclick="xadmin.open('添加组','./gym_coachGroup_add.html',400,300)">
+							<i class="layui-icon"></i>添加
+						</button>
+						<button class="layui-btn" id="edit">
+							<i class="layui-icon"></i>修改
+						</button>
+						<div class="layui-inline layui-show-xs-block" id="query"
+							style="float: right">
+							<button class="layui-btn" id="queryById" lay-submit=""
+								lay-filter="sreach">
+								<i class="layui-icon">&#xe615;</i>
+							</button>
+						</div>
+						<div class="layui-inline layui-show-xs-block"
+							style="float: right; margin-top: 7px;">
+							<input type="text" name="username" placeholder="请输入健身组名"
+								autocomplete="off" class="layui-input" id="searchNameId">
+						</div>
+					</div>
+					<div class="layui-card-body layui-table-body layui-table-main">
+						<table class="layui-table layui-form">
+							<thead>
+								<tr>
+									<th><input type="checkbox" lay-filter="checkall" name=""
+										lay-skin="primary" id="checkAll"></th>
+									<!-- <th>教练组编号</th> -->
+									<th>组名</th>
+									<th>教练数</th>
+									<th>在授课程数</th>
+								</tr>
+							</thead>
+							<tbody id="tbodyId">
+								<tr>
+									<td colspan="5">数据正在加载中...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="layui-card-body ">
+						<div class="page">
+							<div id="pageId">
+								<!-- <a class="prev" href="">&lt;&lt;</a> <a class="num" href="">1</a>
+								<span class="current">2</span> <a class="num" href="">3</a> <a
+									class="num" href="">489</a> <a class="next" href="">&gt;&gt;</a> -->
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li><a class="first">首页</a></li>
+									<li><a class="pre">上一页</a></li>
+									<li><a class="next">下一页</a></li>
+									<li><a class="last">尾页</a></li>
+									<li><a class="rowCount">总记录数(0)</a></li>
+									<li><a class="pageCount">总页数(0)</a></li>
+									<li><a class="pageCurrent">当前页(1)</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	layui.use([ 'laydate', 'form' ], function() {
+		var laydate = layui.laydate;
+		var form = layui.form;
+
+		// 监听全选
+		form.on('checkbox(checkall)', function(data) {
+
+			if (data.elem.checked) {
+				$('tbody input').prop('checked', true);
+			} else {
+				$('tbody input').prop('checked', false);
+			}
+			form.render('checkbox');
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#start' //指定元素
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#end' //指定元素
+		});
+
+	});
+	$(function() {
+		doGetObjects();
+		$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+		$("#query").on("click", "#queryById", doQueryObjects);
+		$("#gymButton").on("click", "#deleteById", doDeleteObjects);
+		$("#gymButton").on("click", "#edit", doEditUI);
+	})
+	function doEditUI() {
+		debugger
+		//获取选中的记录数据
+		var ids = doGetCheckedId();
+		if (ids==null) {
+			alert("请选择一个");
+			$("#edit").removeAttr("onclick");
+			return;
+		}
+		xadmin.open('修改组','./gym_coachGroup_edit.html',400,300)
+	}
+	function doGetCheckedId() {
+		var array;
+		$("#tbodyId input[type=checkbox]").
+		each(function() {
+			if ($(this).prop("checked")) {
+				array=$(this).val();
+				localStorage.setItem('array',array);
+			}
+		});
+		return array;
+	}
+	function doDeleteObjects() {
+		//1.获取选中的id值
+		var ids = doGetCheckedIds();
+		if (ids.length == 0) {
+			alert("至少选择一个");
+			return;
+		}
+		if (!confirm("确认删除吗?"))
+			return;
+		//2.发异步请求执行删除操作
+		var url = "CoachGroup/doDeleteObjects";
+		var params = {
+			"ids" : ids.toString()
+		};
+		console.log(params);
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				debugger
+				doSetPageCurrent();
+				doGetObjects();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+	function doSetPageCurrent() {
+		var pageCount = $("#pageId").data("pageCount");
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var checked = $("#checkAll").prop("checked");
+		if (pageCurrent == pageCount && checked && pageCurrent > 1) {
+			pageCurrent--;
+			$("#pageId").data("pageCurrent", pageCurrent);
+		}
+	}
+	function doGetCheckedIds() {
+		//定义一个数组,用于存储选中的checkbox的id值
+		var array = [];//new Array();
+		//获取tbody中所有类型为checkbox的input元素
+		$("#tbodyId input[type=checkbox]").
+		//迭代这些元素，每发现一个元素都会执行如下回调函数
+		each(function() {
+			//假如此元素的checked属性的值为true
+			if ($(this).prop("checked")) {
+				//调用数组对象的push方法将选中对象的值存储到数组
+				array.push($(this).val());
+			}
+		});
+		return array;
+	}
+	function doQueryObjects() {
+		//为什么要在此位置初始化pageCurrent的值为1?
+		//数据查询时页码的初始位置也应该是第一页
+		$("#pageId").data("pageCurrent", 1);
+		//为什么要调用doGetObjects函数？
+		//重用js代码，简化jS代码编写。
+		doGetObjects();
+	}
+	function doSetPagination(page) {
+		//1.初始化数据
+		$(".rowCount").html("总记录数(" + page.total + ")");
+		$(".pageCount").html("总页数(" + page.pages + ")");
+		$(".pageCurrent").html("当前页(" + page.pageNum + ")");
+		//2.绑定数据(为后续对此数据的使用提供服务)
+		$("#pageId").data("pageCurrent", page.pageNum);
+		$("#pageId").data("pageCount", page.pages);
+	}
+	function doJumpToPage() {
+		debugger
+		//1.获取点击对象的class值
+		var cls = $(this).prop("class");//Property
+		//2.基于点击的对象执行pageCurrent值的修改
+		//2.1获取pageCurrent,pageCount的当前值
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var pageCount = $("#pageId").data("pageCount");
+		//2.2修改pageCurrent的值
+		if (cls == "first") {//首页
+			pageCurrent = 1;
+		} else if (cls == "pre" && pageCurrent > 1) {//上一页
+			pageCurrent--;
+		} else if (cls == "next" && pageCurrent < pageCount) {//下一页
+			pageCurrent++;
+		} else if (cls == "last") {//最后一页
+			pageCurrent = pageCount;
+		} else {
+			return;
+		}
+		//3.对pageCurrent值进行重新绑定
+		$("#pageId").data("pageCurrent", pageCurrent);
+		//4.基于新的pageCurrent的值进行当前页数据查询
+		doGetObjects();
+	}
+	function doGetObjects() {
+		//debugger;//断点调试
+		//1.定义url和参数
+		debugger
+		var url = "CoachGroup/doFindPageObjects"
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+		//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
+		if (!pageCurrent)
+			pageCurrent = 1;
+		var params = {
+			"pageCurrent" : pageCurrent
+		};//pageCurrent=2
+		//为什么此位置要获取查询参数的值?
+		//一种冗余的应用方法，目的时让此函数在查询时可以重用。
+		var tecDirection = $("#searchNameId").val();
+		//如下语句的含义是什么？动态在js对象中添加key/value,
+		if (tecDirection)
+			params.tecDirection = tecDirection;//查询时需要
+		$.getJSON(url, params, function(result) {
+			debugger
+			//JsonResult->PageObject->List<SysLogs>+...
+			//请问result是一个字符串还是json格式的js对象？对象
+			doHandleResponseResult(result);
+		});//特殊的ajax函数
+	}
+	function doHandleResponseResult(result) { //JsonResult
+		if (result.state == 1) {//ok
+			//更新table中tbody内部的数据
+			doSetTableBodyRows(result.data.list);//将数据呈现在页面上 
+			//更新页面page.html分页数据
+			doSetPagination(result.data); //此方法写到page.html中
+		} else {
+			alert(result.message);
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			doSetPagination(result.data);
+		}
+	}
+	function doSetTableBodyRows(records) {
+		//1.获取tbody对象，并清空对象
+		var tBody = $("#tbodyId");
+		tBody.empty();
+		//2.迭代records记录，并将其内容追加到tbody
+		for ( var i in records) {
+			//2.1 构建tr对象
+			var tr = $("<tr></tr>");
+			//2.2 构建tds对象
+			var tds = doCreateTds(records[i]);
+			//2.3 将tds追加到tr中
+			tr.append(tds);
+			//2.4 将tr追加到tbody中
+			tBody.append(tr);
+		}
+	}
+	function doCreateTds(data) {
+		var tds = "<td><input type='checkbox' id='CoachGroupId' class='cBox' name='id' value='"+data.groupId+"' lay-skin='primary'></td>"
+				+ /* "<td>"
+																+ data.groupId
+																+ "</td>"
+																+ */"<td id='tecDirection'>"
+				+ data.tecDirection
+				+ "</td>"
+				+ "<td id='coachNumber'>"
+				+ data.coachNumber
+				+ "</td>"
+				+ "<td id='classNumber'>"
+				+ data.classNumber
+				+ "</td>";
+		return tds;
+	}
+</script>
+</html>

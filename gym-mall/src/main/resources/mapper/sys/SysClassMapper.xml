@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gy.pj.sys.dao.SysClassDao">
+
+	<!-- 基于角色Name查询角色信息 -->
+	<select id="findObjectByName"
+		resultType="com.gy.pj.sys.entity.SysClass">
+		select id,name,picUrl,description,coachId,price,number
+		from
+		gym_class
+		<include refid="queryWhereId" />
+	</select>
+
+	<select id="findPageObjects"
+		resultType="com.gy.pj.sys.entity.SysClass">
+		select *
+		from gym_class
+		<include refid="queryWhereId" />
+		<!-- order by createdTime desc -->
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		from gym_class
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="name!=null and name!=''">
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+
+</mapper>

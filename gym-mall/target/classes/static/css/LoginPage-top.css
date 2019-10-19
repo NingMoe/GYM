@@ -1,0 +1,671 @@
+/*头头
+ * 
+ * 
+ * 
+ * */
+
+.o-header2 {
+	background-color: #202023;
+	font-family: "Microsoft Yahei";
+	position: fixed;
+	/*这个属性定义建立元素布局所用的定位机制.fix生成绝对定位的元素，相对于浏览器窗口进行定位。*/
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1001;
+	/*z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面。*/
+	box-shadow: 0 2px 8px 0 rgba(1, 1, 1, 0.5);
+	/*box-shadow 属性向框添加一个或多个阴影。*/
+}
+
+.o-header2_inner {
+	width: 1200px;
+	height: 50px;
+	margin: 0 auto;
+	/*浏览器计算外边距。*/
+	*zoom: 1;
+	/*zoom:1;属性是IE浏览器的专有属性，Firefox等其它浏览器不支持。它可以设置或检索对象的缩放比例。*/
+}
+
+.o-header2-nav .item-group a,
+.o-header2-nav .item-group span {
+	margin-right: 8px;
+	margin-left: 3px;
+	color: #d7d7d7;
+	cursor: pointer;
+}
+
+* {
+	tap-highlight-color: transparent;
+	/*设置或检索对象的轻按时高亮。*/
+	-webkit-tap-highlight-color: transparent;
+	/*设置或检索对象的轻按时高亮。*/
+	-ms-tap-highlight-color: transparent;
+	/*移动端开发的过程中，当用户连接某个文字 跳转时候 出现 高亮一块，这样很影响用户体验，
+    我们可以吧颜色设置为透明  或者自己需要的颜色*/
+	-moz-box-sizing: border-box;
+	/*属性允许您以特定的方式定义匹配某个区域的特定元素。*/
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	/*box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。就是说，为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+
+通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。*/
+}
+
+.o-header_logo img {
+	display: block;
+	/*这个属性用于定义建立布局时元素生成的显示框类型。此元素将显示为块级元素，此元素前后会带有换行符。*/
+	overflow: hidden;
+	/*overflow 属性规定当内容溢出元素框时发生的事情。内容会被修剪，并且其余内容是不可见的。*/
+	width: 100%;
+	margin-top: 9px;
+	/*设置元素的上外边距*/
+}
+
+.o-header2-nav .item-dl {
+	padding-left: 35px;
+	/*该属性设置元素左内边距的宽度。*/
+	background: 10px center no-repeat;
+	/*规定背景图像的尺寸center设置背景图像的起始位置no-repeat背景图像将仅显示一次。*/
+}
+
+img {
+	height: auto;
+	/*默认。浏览器会计算出实际的高度。*/
+	vertical-align: middle;
+	/*设置元素的垂直对齐方式,把此元素放置在父元素的中部。*/
+	-ms-interpolation-mode: bicubic;
+	/*是网页缩放的时候图片不失真*/
+}
+
+.o-header2-nav .item-group a,
+.o-header2-nav .item-group {
+	margin-right: 8px;
+	margin-left: 3px;
+	color: #d7d7d7;
+	cursor: pointer;
+	/*定义了鼠标指针放在一个元素边界范围内时所用的光标形状,光标呈现为指示链接的指针（一只手）*/
+}
+
+.o-header2-nav .item-group a:hover {
+	color: #FF0000;
+}
+
+html,
+body,
+body div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+figure,
+footer,
+header,
+menu,
+nav,
+section,
+time,
+mark,
+audio,
+video,
+details,
+summary {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	/*设置所有的边框属性*/
+	font-size: 100%;
+	font-weight: normal;
+	vertical-align: baseline;
+	outline: 0;
+}
+
+
+/*body a,
+html a {
+	text-decoration: none!important;/*消除下划线*/
+
+color: #8c8c8c;
+
+}
+*/ a:-webkit-any-link {
+	color: -webkit-link;
+	/*匹配Webkit枘核浏览器*/
+	
+	cursor: pointer;
+	text-decoration: underline;
+}
+body,
+html {
+	font-family: "Microsoft Yahei", Helvetica, Tahoma, "SimSun", sans-serif;
+}
+body {
+	line-height: 1;
+	min-width: 1300px;
+}
+html {
+	color: -internal-root-color;
+	/*?*/
+}
+.o-header2-nav .item:hover {
+	color: #FF0000;
+}
+.o-header2-nav .item {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	/*定义元素在哪个方向浮动*/
+	
+	text-align: center;
+	/*规定元素中的文本的水平对齐方式,把文本排列到中间。*/
+	
+	padding: 0 25px;
+	color: #d7d7d7;
+	font-size: 14px;
+}
+.o-header2-nav .item-group {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	text-align: center;
+	padding: 0 30px;
+	color: #d7d7d7;
+	font-size: 14px;
+}
+.o-header2-nav div {
+	float: left;
+}
+div {
+	display: block;
+}
+.o-header_ctrl {
+	float: right;
+	display: inline;
+	/*默认。此元素会被显示为内联元素，元素前后没有换行符。*/
+	
+	font-size: 12px;
+}
+.o-header2-nav {
+	float: right;
+}
+.o-header_logo {
+	width: 84px;
+	height: 34px;
+	float: left;
+	display: inline;
+}
+a,
+body {
+	color: #1a1a1a;
+}
+a,
+div,
+header,
+span {
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+body {
+	font-family: Microsoft YaHei, Helvetica Neue, Helvetica, STHeiTi, Arial, sans-serif;
+	font-size: 12px;
+	line-height: 1.4;
+}
+html {
+	-ms-text-size-adjust: 100%;
+	/*这属性现在的一般用处是防止iPhone在坚屏转向横屏时放大文字*/
+	
+	-webkit-text-size-adjust: 100%;
+	font-size: 62.5%;
+}
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+i {
+	font-style: italic;
+}
+a {
+    text-decoration: none;
+}
+/*
+ * 
+ * 
+ * 底部的修饰*/
+
+.o-hiyd-footer {
+	background: #2b2b2e;
+    padding: 26px 0;
+    min-width: 1200px;
+    height:150px;
+}
+
+.o-footer-row {
+    color: #666;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.o-footer-row a, .o-footer-row span {
+    color: #666;
+    font-size: 12px;
+    margin: 0 10px 0 8px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+/*
+ * 
+ * 
+ * 中间的修饰*/
+.o-regist2 {
+    box-shadow: 0 0 5px #999;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding-bottom: 36px;
+    width: 1000px;
+    margin: 100px auto;
+    font-family: "microsoft Yahei";
+}
+.o-regist2 .setion-hd {
+    height: 104px;
+    background: #26262e;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#26262e),color-stop(100%,#46464c));
+    background: -webkit-linear-gradient(top,#26262e 0,#46464c 100%);
+    background: linear-gradient(to bottom,#26262e 0,#46464c 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= $color-form,endColorstr= $color-to,GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr= #26262e,endColorstr= #46464c,GradientType=0);
+    border-size: content-box;
+}
+.o-regist2 .setion-hd .setion-title {
+    color: #fff;
+    font-size: 22px;
+}
+.o-regist2 .setion-title {
+    text-align: center;
+    padding-top: 36px;
+}
+/*h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}*/
+.o-ucenter-wrap .record-list .record-icon, .o-ucenter-wrap .record-list .record-item.expand .item-title i, .o-ucenter-wrap .aside-ft .btn-show-more i, .o-ucenter-wrap .record-list .item-title span i, .o-ucenter-wrap .aside-ft .btn-show-less i, .o-ucenter-wrap .data-show .btn-prev:before, .o-ucenter-wrap .data-show .btn-next:before, .o-ucenter-wrap .aside-hd .sex .male, .o-ucenter-wrap .aside-hd .sex .female, .o-ucenter-wrap .aside-hd .btn-edit:before, .o-ucenter-wrap .aside-bd .action-bar .cal, .o-ucenter-wrap .aside-bd .action-bar .share, .account-basic-wrapper .item.weixin .icon, .o-regist2 .other-login_bd .login-wx, .account-basic-wrapper .item.weibo .icon, .o-regist2 .other-login_bd .login-wb, .account-basic-wrapper .item.qq .icon, .o-regist2 .other-login_bd .login-qq, .o-bindUser .section-main .form-info .msg-err, .o-regist_row .icon-notice, .o-regist2 .icon_notice, .o-regist2 .icon_hiyd, .o-regist2 .icon_phone, .o-regist2 .icon_pic, .o-regist2 .icon_msg, .o-regist2 .icon_psw, .o-regist2 .icon_user, .o-regist2 .icon_right, .o-bbcourse-index .box-info-hd .box-btn.btn-sign i, .o-bbcourse-index .box-table .table-con td:hover .row-sign i {
+    background-size: 84px 4085px;
+    background-image: url(https://www.hiyd.com/static/img/sprite/global_1_z.png?d7af1b2b1c6d7b97);
+}
+.o-regist2 .icon_hiyd {
+    background-position: 0 -3479px;
+}
+.o-regist2 .icon_hiyd {
+    display: inline-block;
+    width: 84px;
+    height: 34px;
+    background-repeat: no-repeat;
+}
+i, em {
+    font-family: Tahoma,"Microsoft YaHei",sans-serif;
+}
+.o-regist2 .setion-title .title-font {
+    display: inline-block;
+    border-left: 1px solid #999;
+    padding-left: 15px;
+    margin-left: 15px;
+    position: relative;
+    top: -5px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+.o-regist2 .section-bd {
+    margin: 26px auto 0 auto;
+    width: 338px;
+}
+.o-regist2 .section-bd .form-info {
+    position: relative;
+}
+.o-regist2 .section-bd .form-info>label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    line-height: 50px;
+}
+.o-regist2 .section-bd .form-info>label>i {
+    position: relative;
+    top: 2px;
+    margin-right: 8px;
+}
+.o-regist2 .icon_phone {
+    background-position: -73px -3523px;
+}
+.o-regist2 .icon_phone {
+    display: inline-block;
+    width: 11px;
+    height: 13px;
+    background-repeat: no-repeat;
+}
+label {
+    cursor: default;
+}
+.o-regist2 .section-bd .form-info .height-wrap, .o-regist2 .section-bd .form-info .weight-wrap, .o-regist2 .section-bd .form-info .fat-wrap, .o-regist2 .section-bd .form-info .phone-wrap {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+}
+.o-regist2 .section-bd .form-info .date-wrap, .o-regist2 .section-bd .form-info .height-wrap, .o-regist2 .section-bd .form-info .weight-wrap, .o-regist2 .section-bd .form-info .fat-wrap, .o-regist2 .section-bd .form-info .phone-wrap {
+    position: relative;
+}
+.o-regist2 .section-bd .form-info .height-wrap:before, .o-regist2 .section-bd .form-info .weight-wrap:before, .o-regist2 .section-bd .form-info .fat-wrap:before, .o-regist2 .section-bd .form-info .phone-wrap:before {
+    right: 18px;
+    z-index: 3;
+    color: #cecece;
+    font-size: 14px;
+    height: 14px;
+    z-index: 4;
+}
+.o-regist2 .section-bd .form-info .date-wrap:before, .o-regist2 .section-bd .form-info .height-wrap:before, .o-regist2 .section-bd .form-info .weight-wrap:before, .o-regist2 .section-bd .form-info .fat-wrap:before, .o-regist2 .section-bd .form-info .phone-wrap:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.o-regist2 .section-bd .form-info .info-text {
+    border: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 18px;
+    line-height: 18px;
+    height: 18px;
+    width: 80%;
+    box-sizing: border-box;
+    outline: 0;
+    z-index: 4;
+    background: transparent;
+    margin: auto;
+    color: #333;
+}
+button, input, select, textarea {
+    font-family: Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif;
+    margin: 0;
+}
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 0px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+.o-regist2 .section-bd .form-info .info-text+div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background: #f5f5f5;
+    z-index: 3;
+}
+.o-regist2 .icon_right {
+    background-position: -64px -3634px;
+}
+.o-regist2 .icon_right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 12px;
+    margin: auto;
+    z-index: 6;
+    display: none;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+}
+.o-regist2 .icon_notice {
+    background-position: -62px -3447px;
+}
+.o-regist2 .icon_notice {
+    display: none;
+    width: 24px;
+    height: 22px;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+    z-index: 6;
+    background-repeat: no-repeat;
+}
+.o-regist2 .section-bd .form-info.row-error .text-notice, .o-regist2 .section-bd .form-info.row-error .icon_notice {
+    display: block;
+}
+.o-regist2 .section-bd .form-info .text-notice {
+    position: absolute;
+    top: 19px;
+    right: 0;
+    height: 11px;
+    line-height: 11px;
+    font-size: 11px;
+    padding-left: 13px;
+    color: #f12b24;
+    background: url(https://www.hiyd.com/static/img/icon_error.png?510e8781f0358bea) no-repeat;
+    display: none;
+}
+.o-regist2 .icon_psw {
+    background-position: -73px -3588px;
+}
+.o-regist2 .icon_psw {
+    display: inline-block;
+    width: 11px;
+    height: 13px;
+    background-repeat: no-repeat;
+}
+input[type="password" i] {
+    -webkit-text-security: disc !important;
+}
+.o-regist2 .icon_user {
+    background-position: -72px -3611px;
+}
+.o-regist2 .icon_user {
+    display: inline-block;
+    width: 12px;
+    height: 13px;
+    background-repeat: no-repeat;
+}
+.o-regist2 .section-bd .form-info .info-text.info-v-pic {
+    width: 60%;
+}
+element.style {
+    display: none;
+}
+.o-regist2 .section-bd .form-info {
+    position: relative;
+}
+.o-regist2 .icon_pic {
+    background-position: -72px -3546px;
+}
+.o-regist2 .icon_pic {
+    display: inline-block;
+    width: 12px;
+    height: 11px;
+    background-repeat: no-repeat;
+}
+#form-imageVCode #imageVCode {
+    width: 192px;
+}
+.o-regist2 .section-bd .next-btn {
+    display: block;
+    width: 164px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    background: #f12b24;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+.o-regist2 .section-bd .next-btn {
+    margin: 62px auto 0 auto;
+}
+.o-regist2 .section-bd .tip-msg2 {
+    font-size: 14px;
+    margin-top: 15px;
+}
+.o-regist2 .section-bd .tip-msg {
+    display: block;
+    color: #167ac6;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 12px;
+}
+.o-regist2 .other-login {
+    padding-top: 35px;
+}
+.o-regist2 .other-login_hd {
+    height: 1px;
+    background: #cecece;
+    position: relative;
+}
+.o-regist2 .other-login_hd h3 {
+    position: absolute;
+    font-size: 14px;
+    color: #333;
+    left: 50%;
+    width: 165px;
+    margin-left: -82.5px;
+    top: -10px;
+    background: #fff;
+    text-align: center;
+    line-height: 20px;
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+.o-regist2 .other-login_bd {
+    padding-top: 35px;
+    *zoom: 1;
+}
+.o-regist2 .other-login_bd:before, .o-regist2 .other-login_bd:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.o-regist2 .other-login_bd:after {
+    clear: both;
+}
+.o-regist2 .other-login_bd:before, .o-regist2 .other-login_bd:after {
+    content: "";
+    display: table;
+    line-height: 0;
+}
+.o-regist2 .other-login_bd .login-qq {
+    background-position: -22px -3354px;
+}
+.o-regist2 .other-login_bd .login-qq {
+    width: 64px;
+    height: 64px;
+    float: left;
+    background-repeat: no-repeat;
+}
+.o-regist2 .other-login_bd span {
+    cursor: pointer;
+    -webkit-transition: opacity ease 300ms;
+    transition: opacity ease 300ms;
+}
+.o-regist2 .other-login_bd .login-wx {
+    background-position: -22px -3210px;
+}
+.o-regist2 .other-login_bd .login-wx {
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin: 0 72px;
+    background-repeat: no-repeat;
+}
+.o-regist2 .other-login_bd .login-wb {
+    background-position: -22px -3282px;
+}
+.o-regist2 .other-login_bd .login-wb {
+    width: 64px;
+    height: 64px;
+    float: left;
+    background-repeat: no-repeat;
+}

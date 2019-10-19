@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gy.pj.sys.dao.SysCoachDao">
+	<!-- 查询当前页，resultType为一行记录映射的类型 -->
+	<select id="findPageObjects"
+		resultType="com.gy.pj.sys.entity.SysCoach">
+		select *
+		<include refid="queryWhereId" />
+		<!-- 重复记录提取 -->
+		order by id
+	</select>
+	<!-- 查询记录总数 -->
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		<include refid="queryWhereId" />
+	</select>
+	<!-- 借助此元素对共性数据进行提取，其他地方用到此元素，内容用include包含 -->
+	<sql id="queryWhereId">
+		from gym_coach
+		<where>
+			<if test="name!=null and name!=''">
+				<!-- 也许有条件也许没有条件，concat是mysql连接字符串的函数，模糊查询 -->
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+	<delete id="deleteObjects">
+		delete from gym_coach
+		where id in
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="id">
+			#{id}
+		</foreach>
+	</delete>
+	<insert id="insertObject"
+		parameterType="com.gy.pj.sys.entity.SysCoach">
+		insert into gym_coach
+		(id,name,gender,groupId,tecDirection,stuNumber,tecNumber)
+		values
+		(null,#{name},#{gender},#{groupId},#{tecDirection},#{stuNumber},#{tecNumber})
+	</insert>
+	<update id="updateObject"
+		parameterType="com.gy.pj.sys.entity.SysCoach">
+		update gym_coach set
+		name=#{name},
+		gender=#{gender},
+		groupId=#{groupId},
+		tecDirection=#{tecDirection},
+		stuNumber=#{stuNumber},
+		tecNumber=#{tecNumber}
+		where id=#{id}
+	</update>
+	<select id="findById" resultType="com.gy.pj.sys.entity.SysCoach">
+		select * from gym_coach
+		where id=#{id}
+	</select>
+		<update id="updateAvatar">
+	update gym_coach set
+	avatar=#{avatar}
+	where id=#{id}
+	</update>
+</mapper>

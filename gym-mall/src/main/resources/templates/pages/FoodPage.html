@@ -1,0 +1,400 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" countent="健身饮食">
+		<title>健身饮食</title>
+		<link rel="stylesheet" href="../css/unlogin-top.css"/>
+		<link rel="stylesheet" href="../css/LoginPage-top.css"/>
+		<link rel="stylesheet" href="../css/equipment.css"/>
+		<link rel="stylesheet" href="../css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/FoodBody.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/Top.css"/>
+		<script type="text/javascript" src="js/xadmin.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="o-hiyd">
+			<!-- <div class="o-header2">
+				<div class="o-header2_inner">
+					<a href="./HomePage.html" class="o-header_logo">
+						<img src="../img/Logo.PNG" />
+					</a>
+					<div class="o-header2-nav">
+						<div data-hicms-tmpl="hiyd-nav">
+							<div>
+								<a href="./FitnessClass.html" target='_self' class="item">特色课程</a>
+								<a href="./Coach.html" target='_self' class="item">优质教练</a>
+								<a href="./FoodPage.html" target='_self' class="item">健身饮食</a>
+								<a href="./EquipmentPage.html" target='_self' class="item">健身器材</a>
+								<a href="./CommentsPage.html" target='_self' class="item">社区精选</a>
+								<a href="./huodong.html" target='_self' class="item">近期活动</a>
+							</div>
+						</div>
+						<div class="item-group">
+							<span id="btn_ouj_login" ><a href="../UserPage/LoginPage.html" target='_self' >登录</a></span>|
+							<span id="btn_ouj_register"><a href="../UserPage/SignPage.html" target='_self' >注册</a></span>
+						</div>
+					</div>
+					<div class="o-header_ctrl">
+					</div>
+				</div>
+			</div> -->
+			<div th:replace="~{topPage :: topbar}"></div> 
+	<div class="o-food"
+    style=" height: 2000px;">
+				<div class="o-food-banner">
+					<span>为身材制定完美计划</span>
+				</div>
+
+				<script>
+					seajs.use(['js/food.js?5d74c0c73f02834e'], function(e) {
+						e.init();
+					});
+				</script>
+
+				<div class="o-article article-tp2 page">
+					<div class="o-article-wrap">
+						<!-- 面包屑导航{ -->
+						<div class="mod-crumbs">
+							<span>当前位置：</span>
+							<a class="back-to-index" title="健身" href="./HomePage.html"></a><span class="arrow">»</span>
+							<b>营养美食</b>
+						</div>
+						<!-- }面包屑导航 -->
+						
+						<div class="col-main1">
+							
+							<div class="list-hd">
+							<h1 class="tag-title" >唤能早餐</h1>
+						</div>
+						
+							<div class="o-article-list">
+
+								<div class="list-bd">
+									<ul>
+										<li class="list-item" data-id="94,257">
+
+											<div class="item-pic">
+												<a href="./Food-introduce2.html"><img src="../img/Breakfast.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="./Food-introduce2.html">橘子黄桃面包</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="./Food-introduce2.html">
+														橘子酱 黄桃 面包 酸奶
+														</a>
+												</p>
+											</div>
+
+										</li>
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/Breakfast1.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">布霖鸡蛋面包</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">
+														李子 鸡蛋 碱水面包 玫瑰花茶
+													</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/Breakfast2.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">芒果香蕉牛奶</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">芒果 香蕉 鸡蛋 蔓越莓牛奶</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/Breakfast4.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">西柚鸡蛋三明治</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">西柚 鸡蛋 三明治 果汁</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/Breakfast5.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">奇异果蛋卷面包</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">奇异果 蛋卷 全麦面包 咖啡</a>
+												</p>
+											</div>
+										</li> 
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-main">
+								<div class="list-hd">
+							<h1 class="tag-title">聚能午餐</h1>
+						</div>
+						
+							<div class="o-article-list">
+
+								<div class="list-bd">
+									<ul>
+										<li class="list-item" data-id="94,257">
+											<div class="item-pic">
+												<a href="#"><img src="../img/JiRou.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">西兰花鸡肉沙拉</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">
+														鲜美多汁的鸡胸肉
+														<span>[详细]</span></a>
+												</p>
+											</div>
+
+										</li>
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/SanWenYu.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">奇异果三文鱼沙拉</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#"></a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/BinCao.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">冰草鲜虾沙拉</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#"></a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/NiuRou.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">山葵牛油果牛肉沙拉</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#"></a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/ShuiGuo.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">缤纷果园沙拉</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#"></a>
+												</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="col-main2">
+								<div class="list-hd">
+							<h1 class="tag-title">精致晚餐</h1>
+						</div>
+						
+							<div class="o-article-list">
+
+								<div class="list-bd">
+									<ul>
+										<li class="list-item" data-id="94,257">
+
+											<div class="item-pic">
+												<a href="#"><img src="../img/dinner.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">蛋果轻食套餐</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">
+														蛋果轻食套餐
+														</a>
+												</p>
+											</div>
+
+										</li>
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/dinner3.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">牛小排轻食套餐</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">牛小排轻食套餐</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="113">
+											<div class="item-pic">
+												<a href="#"><img src="../img/dinner2.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">三文鱼轻食套餐</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">三文鱼轻食套餐</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/dinner4.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">火腿意面轻食套餐</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">火腿意面轻食套餐</a>
+												</p>
+											</div>
+										</li>
+
+										<li class="list-item" data-id="85">
+											<div class="item-pic">
+												<a href="#"><img src="../img/dinner5.jpg" /></a>
+											</div>
+											<div class="item-content">
+												<h2><a href="#">甜虾仁轻食套餐</a></h2>
+												<em>&nbsp;&nbsp;&nbsp;&nbsp;</em>
+												<p>
+													<a href="#">甜虾仁轻食套餐</a>
+												</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+
+				</div>
+
+	</div>
+	</div>
+	</div>
+	
+	<div class="page-footer">
+		    <!--底部的东西-->
+			<div class="o-hiyd-footer">
+				<div class="o-footer-row">
+					<a class="footer-nav-link" href="https://www.11467.com/qiye/35839987.htm" target='_blank'>关于偶家</a>|
+					<span>Copyright (C) 2019 www.hiyd.com 版权所有 广州市偶家科技有限公司</span>
+				</div>
+				<div class="o-footer-row">
+					<span>粤网文（2015）1655-286号</span> | <span>粤ICP备15035085号-3</span>
+				</div>
+			</div>
+		</div>
+	<!-- <div class="o-hiyd-footer">
+				<div data-hicms-tmpl="foot-links">
+					<div class="o-footer-row">
+						<span class="label">商务合作</span>
+						<a href="http://www.hao123.com/">hao123</a>
+						|
+						<a target="_blank" href="http://www.jirou.com/">肌肉网</a>
+						|
+						<a target="_blank" href="http://www.fitnes.cn/">我爱健身网</a>
+						|
+						<a target="_blank" href="http://qmjs.tiqiu.com/">全民健身</a>
+						|
+						<a target="_blank" href="http://www.caibb.com/">网络购彩</a>
+						|
+						<a target="_blank" href="http://www.51fit.com.cn">51健身</a>
+						|
+						<a target="_blank" href="http://www.qiuzk.com/">足球盘口</a>
+						|
+						<a target="_blank" href="http://hzp.onlylady.com/clinique/">倩碧</a>
+						|
+						<a target="_blank" href="http://www.kukefit.com">酷客健身</a>
+						|
+						<a target="_blank" href="http://123.yy.com/">网址导航</a>
+						|
+						<a href="http://baike.pcbaby.com.cn/" target="_blank">亲子百科</a>
+						|
+						<a href="https://bbs.pcbaby.com.cn/" target="_blank">亲子论坛</a>
+						|
+						<a href="http://www.mama.cn/" target="_blank">妈妈网</a>
+						|
+						<a href="http://www.mama.cn/z/" target="_blank">妈妈网百科</a>
+						|
+						<a href="http://wenda.pchouse.com.cn/" target="_blank">家居问答</a>
+						|
+						<a href="http://v.52pk.com/" target="_blank">娱乐视频</a>
+						|
+						<a href="https://www.3839.com/" target="_blank">好游快爆</a>
+						|
+						<a href="http://acc.pconline.com.cn/" target="_blank">太平洋外设配件</a>
+						|
+						<a href="http://www.kaluli.com/" target="_blank">卡路里运动营养</a>
+						|
+						<a href="http://www.znymqg.com/" target="_blank">羽毛球</a>
+						|
+						<a href="http://qmjs.tiqiu.com/" target="_blank">全民健身</a>
+						|
+						<a href="http://www.00791.com/" target="_blank">手游排行榜</a>
+						|
+						<a href="http://www.lmjsport.cn/" target="_blank">家用跑步机</a>
+						|
+						<a href="http://www.cnlmj.com/" target="_blank">健身房器材</a>
+						|
+						<a href="http://www.1zuqiu.com/" target="_blank">足球比分</a>
+					</div>
+				</div>
+
+				<div class="o-footer-row">
+					<a class="footer-nav-link" href="https://www.11467.com/qiye/35839987.htm" target='_blank'>关于偶家</a>|
+					<span>Copyright (C) 2019 www.hiyd.com 版权所有 广州市偶家科技有限公司</span>
+				</div>
+				<div class="o-footer-row">
+					<span>粤网文（2015）1655-286号</span> | <span>粤ICP备15035085号-3</span>
+				</div>
+
+		</div> -->
+			
+	</body>	
+
+</html>

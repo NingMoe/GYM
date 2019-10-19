@@ -1,0 +1,285 @@
+<!-- <!DOCTYPE html> -->
+<html class="x-admin-sm">
+<head>
+<meta charset="UTF-8">
+<title>欢迎页面-X-admin2.2</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" /> 
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/xadmin.css">
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="x-nav">
+		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
+			<a> <cite>导航元素</cite></a>
+		</span> <a class="layui-btn layui-btn-small"
+			style="line-height: 1.6em; margin-top: 3px; float: right"
+			onclick="location.reload()" title="刷新"> <i
+			class="layui-icon layui-icon-refresh" style="line-height: 30px"></i>
+		</a>
+	</div>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<!-- 	<div class="layui-card-body ">
+						<form class="layui-form layui-col-space5">
+							<div class="layui-input-inline layui-show-xs-block">
+								<input class="layui-input" placeholder="开始日" name="start"
+									id="start">
+							</div>
+							<div class="layui-input-inline layui-show-xs-block">
+								<input class="layui-input" placeholder="截止日" name="end" id="end">
+							</div>
+						</form>
+					</div> -->
+
+					<div class="layui-card-header" id="gymButton">
+						<button class="layui-btn layui-btn-danger" id="deleteById">
+							<i class="layui-icon"></i>删除
+						</button>
+						<!-- 	<button class="layui-btn"
+								onclick="xadmin.open('添加商品','./gym_foodAdd.html',800,600)">
+								<i class="layui-icon"></i>添加
+							</button> -->
+
+						<button type="button" class="layui-btn btn-add">
+							<i class="layui-icon"></i>添加
+						</button>
+						<button type="button" class="layui-btn btn-update">
+							<i class="layui-icon"></i>修改
+						</button>
+
+						<div class="layui-inline" id="query"
+							style="float: right; padding-top: 7px;">
+							<button class="layui-btn" id="queryById" lay-submit=""
+								lay-filter="sreach">
+								<i class="layui-icon">&#xe615;</i>
+							</button>
+						</div>
+						<div class="layui-inline" style="float: right; margin-top: 7px;">
+							<input type="text" name="username" placeholder="请输入食材"
+								autocomplete="off" class="layui-input" id="searchFood">
+						</div>
+
+					</div>
+					<div class="layui-card-body ">
+						<table class="layui-table layui-form">
+							<thead>
+								<tr>
+									<th><input type="checkbox" lay-filter="checkall" name=""
+										lay-skin="primary" id="checkAll"></th>
+									<th>食物名称</th>
+									<th>热量(千卡)</th>
+									<th>蛋白质(克)</th>
+									<th>碳水化合物(克)</th>
+									<th>脂肪(克)</th>
+									<th>胆固醇(毫克)</th>
+									<th>维生素(毫克)</th>
+									<th>适合人群</th>
+								</tr>
+							</thead>
+							<tbody id="tbodyId">
+								<tr>
+									<td colspan="9">数据正在加载中...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="layui-card-body ">
+						<div class="page">
+							<div id="pageId" class="box-footer clearfix">
+								<!-- <ul class="pagination pagination-sm no-margin pull-right">
+									<li><a class="first">首页</a></li>
+									<li><a class="pre">上一页</a></li>
+									<li><a class="next">下一页</a></li>
+									<li><a class="last">尾页</a></li>
+									<li><a class="rowCount">总记录数(0)</a></li>
+									<li><a class="pageCount">总页数(0)</a></li>
+									<li><a class="pageCurrent">当前页(0)</a></li>
+								</ul> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		layui.use([ 'laydate', 'form' ], function() {
+			var laydate = layui.laydate;
+			var form = layui.form;
+			// 监听全选
+			form.on('checkbox(checkall)', function(data) {
+				if (data.elem.checked) {
+					$('tbody input').prop('checked', true);
+				} else {
+					$('tbody input').prop('checked', false);
+				}
+				form.render('checkbox');
+			});
+			laydate.render({
+				elem : '#start'
+			});
+			laydate.render({
+				elem : '#end'
+			});
+		});
+		
+		
+		$(function() {
+			//doGetObjects();
+			$("#pageId").load("doPageUI", doGetObjects);
+			$(".layui-inline").on("click", ".layui-btn", doQueryObjects)
+			$("#gymButton").on("click", "#deleteById", doDeleteObjects)
+			$("#gymButton").on("click", ".btn-add,.btn-update", doLoadEditUI);
+		});
+
+
+		function doLoadEditUI() {
+			var title;
+			if ($(this).hasClass("btn-add")) {
+				title = "添加商品"
+				 	var a=null;
+	        	localStorage.setItem('array',a);
+			} else if ($(this).hasClass("btn-update")) {
+				title = "修改商品"
+				var rowData = doGetCheckedItem();
+				
+				localStorage.setItem('array',JSON.stringify(rowData));
+				
+				if (!rowData) {
+					alert("请选择一个");
+					return;
+				}
+			}
+			var url = "./gym_foodadd";
+			$(".layui-fluid").load(url, function() {
+				$(".box-title").html(title);
+			});
+		}
+
+		function doGetCheckedItem() {
+			var tr = $("#tbodyId input[type='checkbox']:checked").parents("tr");
+			var rowData = tr.data("rowData");
+			return rowData;
+		}
+
+		function doDeleteObjects() {
+			var idArray = doGetCheckedIds();
+			if (idArray.length == 0) {
+				alert("请先选中");
+				return;
+			}
+			if (!confirm("确定删除吗"))
+				return;
+			var params = {
+				"ids" : idArray.toString()
+			};
+			var url = "food/doDeleteByIds";
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					alert(result.message);
+					doDeleteRefreshPage();
+				} else {
+					alert(result.message);
+				}
+			})
+		}
+		
+		function doGetCheckedIds() {
+			var array = [];
+			$("#tbodyId input[type='checkbox']").each(function() {
+				var checked = $(this).prop("checked");
+				if (checked) {
+					array.push($(this).val());
+				}
+			});
+			return array;
+		}
+		function doDeleteRefreshPage() {
+			//1.修改页码值
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			var pageCount = $("#pageId").data("pageCount");
+			var state = $("#checkAll").prop("checked");
+			if (state && pageCurrent == pageCount && pageCurrent > 1) {
+				pageCurrent--;
+				$("#pageId").data("pageCurrent", pageCurrent);
+			}
+			//2.重新执行查询
+			doGetObjects();
+		}
+		function doQueryObjects() {
+			$("#pageId").data("pageCurrent", 1);
+			doGetObjects();
+		}
+		function doGetObjects() {
+			$("#checkAll").prop("checked", false);
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			if (!pageCurrent)
+				pageCurrent = 1;
+			var params = {
+				"pageCurrent" : pageCurrent
+			}
+			var uname = $("#searchFood").val();
+			if (uname)
+				params.food = uname;
+			var url = "food/doFindFoodObjects";
+			$.getJSON(url, params, function(result) {
+				doHandleResponseResult(result);
+				console.log(result)
+			});
+		}
+		function doHandleResponseResult(result) {
+			if (result.state == 1) {
+				doSetTableBodyRows(result.data.list);
+				doSetPagination(result.data);
+			} else {
+				alert(result.message);
+			}
+		}
+		function doSetTableBodyRows(records) {
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			for ( var i in records) {
+				var tr = $("<tr></tr>");
+				tr.data("rowData", records[i]);
+				var tds = doCreateTds(records[i]);
+				tr.append(tds);
+				tBody.append(tr);
+			}
+		}
+		function doCreateTds(data) {
+			var tds = "<td><input type='checkbox' class='cBox' value='"+data.id+"' lay-skin='primary'></td>"
+					+ "<td>"
+					+ data.food
+					+ "</td>"
+					+ "<td>"
+					+ data.heat
+					+ "</td>"
+					+ "<td>"
+					+ data.protein
+					+ "</td>"
+					+ "<td>"
+					+ data.carbo
+					+ "</td>"
+					+ "<td>"
+					+ data.axunge
+					+ "</td>"
+					+ "<td>"
+					+ data.chol
+					+ "</td>"
+					+ "<td>"
+					+ data.vitamin
+					+ "</td>"
+					+ "<td>" + data.scope + "</td>";
+			return tds;
+		}
+	</script>
+</body>
+</html>

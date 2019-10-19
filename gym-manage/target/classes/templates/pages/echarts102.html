@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ECharts</title>
+
+
+<!-- 1.引入 echarts.js -->
+<script src="js/echarts.js"></script>
+
+<!-- 主题可以自定义 -->
+<script src="js/roma.js"></script>
+
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+
+	<!-- 2.为ECharts准备一个具备大小（宽高）的div -->
+	<div id="main" style="width: 100%; height: 400px;"></div>
+	
+	<script type="text/javascript">
+	
+	<!-- 3. 基于准备好的dom，初始化echarts实例 -->
+    var myChart = echarts.init(document.getElementById('main'),'roma');
+    
+    var productName = [];
+    var heat = [];
+    var carbo=[]
+    var axunge=[]
+    var chol=[]
+    var vitamin=[]
+	var protein=[]
+    
+    <!--5.ajax获取数据 -->
+    
+ 
+    
+    $.get("food/doFindAll",function (result) {
+   	var datA=result.data
+   	for (var i = 0; i < datA.length; i++){
+           productName.push(datA[i].food);
+           heat.push(datA[i].heat);
+           carbo.push(datA[i].carbo);
+           axunge.push(datA[i].axunge);
+           chol.push(datA[i].chol);
+           vitamin.push(datA[i].vitamin);
+		   protein.push(datA[i].protein);
+       }
+   	
+   	<!--4.指定图表的配置项和数据 -->
+    var option = {
+        title: {
+            text: '折线图'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+        	selectedMode: 'single',
+            data:['热量(千卡)','蛋白质(克)','碳水化合物(克)','脂肪(克)','胆固醇(毫克)','维生素(毫克)']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data:productName
+        },
+        yAxis: {
+        },
+        series: [
+            {
+                name:'热量(千卡)',
+                type:'line',
+                stack: '总量',
+                data:heat
+            },
+            {
+                name:'蛋白质(克)',
+                type:'line',
+                stack: '总量',
+                data:protein
+            },
+            {
+                name:'碳水化合物(克)',
+                type:'line',
+                stack: '总量',
+                data:carbo
+            },
+            {
+                name:'脂肪(克)',
+                type:'line',
+                stack: '总量',
+                data:axunge
+            },
+            {
+                name:'胆固醇(毫克)',
+                type:'line',
+                stack: '总量',
+                data:chol
+            },
+		{
+                name:'维生素(毫克)',
+                type:'line',
+                stack: '总量',
+                data:vitamin
+            }
+        ]
+    };
+    
+    <!--6.使用刚指定的配置项和数据显示图表。-->
+    myChart.setOption(option);
+    });
+    </script>
+</body>
+</html>

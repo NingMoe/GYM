@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+<meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+
+
+
+	<div id="container" style="height: 90%"></div>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+	<script type="text/javascript"
+		src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+		
+		<script src="js/roma.js"></script>
+		<script src="js/dark.js"></script>
+		<script src="js/shine.js"></script>
+		<script src="js/chalk.js"></script>
+		<script src="js/macarons.js"></script>
+	<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom,'dark');
+var app = {};
+option = null;
+
+var data = [{
+    name: '背部',
+    itemStyle: {
+        color: '#da0d68'
+    },
+    children: [{
+        name: '刘明',
+        value: 1,
+        itemStyle: {
+            color: '#975e6d'
+        },  children: [{
+            name: '肩颈舒缓操',
+            value: 1,
+            itemStyle: {
+                color: '#f99e1c'
+            }
+        }]
+    }, {
+        name: '王明明',
+        itemStyle: {
+            color: '#e0719c'
+        },
+        children: [{
+            name: '完美胸背打造基础',
+            value: 1,
+            itemStyle: {
+                color: '#f99e1c'
+            }
+        }, {
+            name: '完美胸背打造进阶',
+            value: 1,
+            itemStyle: {
+                color: '#ef5a78'
+            }
+        }, {
+            name: '完美胸背打造高级',
+            value: 1,
+            itemStyle: {
+                color: '#f7f1bd'
+            }
+        }]
+    }]
+}, {
+    name: '全身',
+    itemStyle: {
+        color: '#da1d23'
+    },
+    children: [{
+        name: '李欣',
+        itemStyle: {
+            color: '#dd4c51'
+        },
+        children: [{
+            name: 'tabata全身燃动',
+            value: 1,
+            itemStyle: {
+                color: '#3e0317'
+            }
+        }, {
+            name: 'HIIT全身燃动初级',
+            value: 1,
+            itemStyle: {
+                color: '#e62969'
+            }
+        }, {
+            name: 'HIIT全身燃动高级',
+            value: 1,
+            itemStyle: {
+                color: '#ef2d36'
+            }
+        }]
+    }, {
+        name: '杨博',
+        itemStyle: {
+            color: '#c94a44'
+        },
+        children: [{
+            name: '功能瑜伽',
+            value: 1,
+            itemStyle: {
+                color: '#b53b54'
+            }
+        }, {
+            name: '纤体瑜伽',
+            value: 1,
+            itemStyle: {
+                color: '#a5446f'
+            }
+        }]
+    }, {
+        name: '李旭',
+        itemStyle: {
+            color: '#dd4c51'
+        },
+        children: [{
+            name: '功能健体',
+            value: 1,
+            itemStyle: {
+                color: '#f2684b'
+            }
+        }, {
+            name: '脂肪燃烧者',
+            value: 1,
+            itemStyle: {
+                color: '#e73451'
+            }
+        }]
+    }]
+}, {
+    name: '腿部',
+    itemStyle: {
+        color: '#ebb40f'
+    },
+    children: [{
+        name: '蒋毅',
+        itemStyle: {
+            color: '#e1c315'
+        },
+        children: [{
+            name: '完美腿部打造',
+            value: 1,
+            itemStyle: {
+                color: '#9ea718'
+            }
+        }]
+    }, {
+        name: '杨波',
+        itemStyle: {
+            color: '#b09733'
+        },
+        children: [{
+            name: '小腿线条打造',
+            value: 1,
+            itemStyle: {
+                color: '#8f1c53'
+            }
+        }]
+    }]
+}, {
+    name: '手臂',
+    itemStyle: {
+        color: '#187a2f'
+    },
+    children: [{
+        name: '钟丽',
+        value: 1,
+        itemStyle: {
+            color: '#a2b029'
+        }
+    }, {
+        name: '凌家溪',
+        value: 1,
+        itemStyle: {
+            color: '#718933'
+        }
+    }, {
+        name: '郭德纲',
+        itemStyle: {
+            color: '#3aa255'
+        },
+        children: [{
+            name: '手臂塑性',
+            value: 1,
+            itemStyle: {
+                color: '#a2bb2b'
+            }
+        }]
+    }]
+}, {
+    name: '腹部',
+    itemStyle: {
+        color: '#0aa3b5'
+    },
+    children: [{
+        name: '刘飘',
+        itemStyle: {
+            color: '#9db2b7'
+        },
+        children: [{
+            name: '完美腹肌打造初级',
+            value: 1,
+            itemStyle: {
+                color: '#8b8c90'
+            }
+        }, {
+            name: '完美腹肌打造高级',
+            value: 1,
+            itemStyle: {
+                color: '#beb276'
+            }
+        }]
+    }, {
+        name: '陆易',
+        itemStyle: {
+            color: '#76c0cb'
+        },
+        children: [{
+            name: '腹肌撕裂者初级',
+            value: 1,
+            itemStyle: {
+                color: '#80a89d'
+            }
+        }, {
+            name: '腹肌撕裂者中级',
+            value: 1,
+            itemStyle: {
+                color: '#def2fd'
+            }
+        }, {
+            name: '腹肌撕裂者高级',
+            value: 1,
+            itemStyle: {
+                color: '#7a9bae'
+            }
+        }]
+    }]
+}, {
+    name: '胸部',
+    itemStyle: {
+        color: '#c94930'
+    },
+    children: [{
+        name: '钱鑫',
+        value: 1,
+        itemStyle: {
+            color: '#caa465'
+        }
+    },{
+        name: '李静',
+        itemStyle: {
+            color: '#be8663'
+        },
+        children: [{
+            name: '完美胸背打造',
+            value: 1,
+            itemStyle: {
+                color: '#b9a449'
+            }
+        }, {
+            name: '胸部塑性',
+            value: 1,
+            itemStyle: {
+                color: '#899893'
+            }
+        }]
+    }, {
+        name: '李维斯',
+        itemStyle: {
+            color: '#ddaf61'
+        },
+    }]
+}];
+
+option = {
+	    series: {
+	        textStyle:{
+	            fontSize:5,
+	        },
+	        type: 'sunburst',
+	        highlightPolicy: 'ancestor',
+	        data: data,
+	        radius: [0, '100%'],
+	        sort: null,
+	        levels: [{}, {
+	            r0: '15%',
+	            r: '35%',
+	            itemStyle: {
+	                borderWidth: 2
+	            },
+	            label: {
+	                rotate: 'tangential',
+	                 fontSize:20,
+	            }
+	        }, {
+	            r0: '35%',
+	            r: '70%',
+	            label: {
+	                align: 'right',
+	                 fontSize:20,
+	            }
+	        }, {
+	            r0: '70%',
+	            r: '72%',
+	            label: {
+	                position: 'outside',
+	                padding: 3,
+	                fontSize:15,
+	                silent: false
+	            },
+	            itemStyle: {
+	                borderWidth: 3
+	            }
+	        }]
+	    }
+	};
+
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+
+       </script>
+</body>
+</html>

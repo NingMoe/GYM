@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+        <script src="lib/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/xadmin.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	
+	
+	
+	
+    <!-- 1.引入 echarts.js -->
+    <script src="js/echarts.js"></script>
+    
+</head>
+<body>
+    <!-- 2.为ECharts准备一个具备大小（宽高）的Dom -->
+    <div class="col-main1" style="float:left;" >
+    <div id="main" style="width: 500px;height:400px;"></div>
+    <div id="main2" style="width: 500px;height:400px;"></div>
+    </div>
+        <div class="col-main3" style="float:left;" >
+    <div id="main3" style="width: 500px;height:400px;"></div>
+    <div id="main4" style="width: 500px;height:400px;"></div>
+    </div>
+    <div class="col-main2" style="float:left;">
+    <div id="main5" style="width: 500px;height:400px;"></div>
+    <div id="main6" style="width: 500px;height:400px;"></div>
+     </div>
+    <script type="text/javascript">
+    
+    $(function() {
+		doO();
+		do2();
+		do3();
+		do4();
+		do5();
+		do6();
+	});
+    
+    function do2(){
+    	debugger
+      	 var myChart = echarts.init(document.getElementById('main2'));
+      	    var productName = [];
+      	    var heat = [];
+      	 $.get("food/doFindAll",function (result) { 
+      		var datA=result.data
+      		for (var i = 0; i < datA.length; i++){
+      	        productName.push(datA[i].food);
+      	      heat.push(datA[i].heat);
+      	    }
+      	  var option ={
+      			 color: ['#E1C315'],
+      	     title: {
+      	         text: '热量'
+      	     },
+      	     tooltip: {},
+      	     legend: {
+      	         data:['千卡']
+      	     },
+      	     xAxis: {
+      	       data: productName
+      	     },
+      	     yAxis: {},
+      	     series: [{
+      	         name: '千卡',
+      	         type: 'bar',
+      	         data: heat
+      	     }]
+      	 };
+      	 myChart.setOption(option);
+      	 });
+      }
+    function doO(){
+    	 var myChart = echarts.init(document.getElementById('main'));
+    	    var productName = [];
+    	    var protein = [];
+    	 $.get("food/doFindAll",function (result) { 
+    		var datA=result.data
+    		for (var i = 0; i < datA.length; i++){
+    	        productName.push(datA[i].food);
+    	        protein.push(datA[i].protein);
+    	    }
+    	  var option ={
+    			  color: ['#0AA3B5'],
+    	     title: {
+    	         text: '蛋白质'
+    	     },
+    	     tooltip: {},
+    	     legend: {
+    	         data:['克']
+    	     },
+    	     xAxis: {
+    	       data: productName
+    	     },
+    	     yAxis: {},
+    	     series: [{
+    	         name: '克',
+    	         type: 'bar',
+    	         data: protein
+    	     }]
+    	 };
+    	 myChart.setOption(option);
+    	 });
+    }
+   function do3(){
+	    var myChart = echarts.init(document.getElementById('main3'));
+	    var productName = [];
+	    var carbo = [];
+	 $.get("food/doFindAll",function (result) {
+		var datA=result.data
+		for (var i = 0; i < datA.length; i++){
+	        productName.push(datA[i].food);
+	        carbo.push(datA[i].carbo);
+	    }
+	  var option ={
+			  color: ['#3AA255'],
+	     title: {
+	         text: '碳水化合物'
+	     },
+	     tooltip: {},
+	     legend: {
+	         data:['克']
+	     },
+	     xAxis: {
+	       data: productName
+	     },
+	     yAxis: {},
+	     series: [{
+	         name: '克',
+	         type: 'bar',
+	         data: carbo
+	     }]
+	 };
+	  myChart.setOption(option);
+	 });
+	    } 
+   function do4(){
+	    var myChart = echarts.init(document.getElementById('main4'));
+	    var productName = [];
+	    var axunge = [];
+	 $.get("food/doFindAll",function (result) {
+		 debugger
+		var datA=result.data
+		for (var i = 0; i < datA.length; i++){
+	        productName.push(datA[i].food);
+	        axunge.push(datA[i].axunge);
+	    }
+	  var option ={
+			  color: ['#E0719C'],
+	     title: {
+	         text: '脂肪'
+	     },
+	     tooltip: {},
+	     legend: {
+	         data:['克']
+	     },
+	     xAxis: {
+	       data: productName
+	     },
+	     yAxis: {
+	    	   axisLine:{
+	                textStyle:{
+	                    color:['#E0719C']
+	                }
+	            } 
+	     },
+	     series: [{
+	         name: '克',
+	         type: 'bar',
+	         data: axunge
+	     }]
+	 };
+	  myChart.setOption(option);
+	 });
+	    } 
+   function do5(){
+	    var myChart = echarts.init(document.getElementById('main5'));
+	    var productName = [];
+	    var chol = [];
+	 $.get("food/doFindAll",function (result) {
+		 debugger
+		var datA=result.data
+		for (var i = 0; i < datA.length; i++){
+	        productName.push(datA[i].food);
+	        chol.push(datA[i].chol);
+	    }
+	  var option ={
+			   
+			  color: ['#DD4C51'],
+	     title: {
+	         text: '胆固醇'
+	     },
+	     tooltip: {},
+	     legend: {
+	         data:['毫克']
+	     },
+	     xAxis: {
+	       data: productName
+	     },
+	     yAxis: {},
+	     series: [{
+	         name: '毫克',
+	         type: 'bar',
+	         data: chol
+	     }]
+	 };
+	  myChart.setOption(option);
+	 });
+	    } 
+   function do6(){
+	    var myChart = echarts.init(document.getElementById('main6'));
+	    var productName = [];
+	    var vitamin = [];
+	 $.get("food/doFindAll",function (result) {
+		 debugger
+		var datA=result.data
+		for (var i = 0; i < datA.length; i++){
+	        productName.push(datA[i].food);
+	        vitamin.push(datA[i].vitamin);
+	    }
+	  var option ={
+			  color: ['#F89A80'],
+	     title: {
+	         text: '维他命'
+	     },
+	     tooltip: {},
+	     legend: {
+	         data:['毫克']
+	     },
+	     xAxis: {
+	       data: productName
+	     },
+	     yAxis: {},
+	     series: [{
+	         name: '毫克',
+	         type: 'bar',
+	         data: vitamin
+	     }]
+	 };
+	  myChart.setOption(option);
+	 });
+	    } 
+    </script>
+</body>
+</html>

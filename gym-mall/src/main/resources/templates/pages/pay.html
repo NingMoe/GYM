@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html style="height: 100%;">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>支付中心</title>
+    <link rel="stylesheet" href="http://cdn.tmooc.cn/tmooc-web/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.tmooc.cn/tmooc-web/css/iconfont.css">
+    <link rel="stylesheet" href="http://cdn.tmooc.cn/tmooc-web/css/customScrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/unlogin-top.css"/>
+	<link rel="stylesheet" href="../css/footer.css"/>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+   
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+</head>
+
+<body class="bgcolor-f6f5fa">
+    <div class="page-header">
+        <!-- <div class="o-header2">
+		    <div class="o-header2_inner">
+		    	<a href="./HomePage.html" class="o-header_logo">
+		            <img src="../img/logo.jpg" />
+		        </a>
+		        <div class="o-header2-nav">
+				        		<div data-hicms-tmpl="hiyd-nav">        
+									<div data-hicms-tmpl="hiyd-nav">
+										<div>
+											<a href="./FitnessClass.html" target='_self' class="item">特色课程</a>
+											<a href="./Coach.html" target='_self' class="item">优质教练</a>
+											<a href="./FoodPage.html" target='_self' class="item">健身饮食</a>
+											<a href="./EquipmentPage.html" target='_self' class="item">健身器材</a>
+											<a href="./CommentsPage.html" target='_self' class="item">社区精选</a>
+											<a href="./huodong.html" target='_self' class="item">近期活动</a>
+										</div>
+									</div>
+								</div>
+	        	<div class="user menu item">
+	                <a href="./Personer-Info.html" class="name">
+	                	<span class="avatar">
+		               	右上角头像图标
+		               		<img src="../img/avatar-default.jpg" alt="">
+		           		</span>
+	                   	xxx
+	         		</a>
+	         		<a href="../UserPage/HomePage.html" class="exit">[退出]</a>
+	        	</div>
+		     			</div>
+	        	<div class="o-header_ctrl"></div>
+	    	</div>
+		</div> -->
+		<div th:replace="~{topPage :: topbar}"></div> 
+    </div>
+
+    <div class="page-body pay-body-xxw">
+        <div class="container">
+            <div class="tit-0313">支付中心</div>
+            <div class="md-2019031301-xxw">
+                <div class="d1">订单信息</div>
+                <div class="d2 clearfix order-info">
+                    <form name=alipayment action="http://123.207.121.120/2/epayapi.php" method=post>
+				<div id="body" style="clear:left">
+					<dl class="content">
+
+						<dd>
+							<span class="null-star"></span>
+							<input id="orderId" size="30" style="display:none;" name="WIDout_trade_no" value="20190911021020360" />
+							<a id="orderIdA"></a>
+							<span>
+</span>
+						</dd>
+
+						<dd>
+							<span class="null-star"></span>
+							<input id="className" size="30" style="display:none;" name="WIDsubject" value="VIP会员" />
+							<a id="classNameA"></a>
+							<span>
+</span>
+						</dd>
+
+						<dd>
+							<span class="null-star"></span>
+							<input id="money" size="30" style="display:none;" name="WIDtotal_fee" value="0.01" />
+							<a id="moneyA"></a>
+							<span>
+</span>
+						</dd>
+						<dd id="pay">
+							<label>
+							<input id="alipay" style="display:none;" type="radio"  name="type" value="alipay" checked=""></label>
+							&nbsp;<label><input id="qqpay" type="radio" style="display:none;"  name="type" value="qqpay"></label>
+							&nbsp;<label><input id="tengxunpay" type="radio" style="display:none;"  name="type" value="wxpay"></label>
+						</dd>
+						<div class="d1">支付方式</div>
+                <div class="d3 clearfix">
+                    <p id="alibaba" class="pay-list pull-left active" data-type="alipay">
+                        <img src="http://cdn.tmooc.cn/tmooc-web/css/img/img_19031303_x.jpg">
+                    </p>
+                    <p id="tengxun" class="pay-list pull-left" data-type="wx">
+                        <img src="img/qqpay.jpg">
+                    </p>
+                    <p id="qq" class="pay-list pull-left" data-type="QQpay">
+                        <img src="http://cdn.tmooc.cn/tmooc-web/css/img/img_19031304_x.jpg">
+                    </p>
+                </div>
+                 <div class="d5 text-right">
+                    <button id="toBuy" type="submit">立即支付</button>
+                </div>
+						
+						
+
+				</div>
+			</form>
+                    <div class="order-text pull-left" id="order-name">
+                    </div>
+                </div>
+                
+                <!-- <div class="d1">支付方式</div>
+                <div class="d3 clearfix">
+                    <p id="alibaba" class="pay-list pull-left active" data-type="alipay">
+                        <img src="http://cdn.tmooc.cn/tmooc-web/css/img/img_19031303_x.jpg">
+                    </p>
+                    <p id="tengxun" class="pay-list pull-left" data-type="wx">
+                        <img src="http://cdn.tmooc.cn/tmooc-web/css/img/img_19031304_x.jpg">
+                    </p>
+                    <p id="qq" class="pay-list pull-left" data-type="QQpay">
+                        <img src="img/qqpay.jpg">
+                    </p>
+                </div> -->
+                <div class="line"></div>.
+                
+                <div class="d4 clearfix">
+                    <div class="pull-left left">
+                        <input type="checkbox" id="courseService"> 同意<a
+                            href="http://www.tmooc.cn/user-agreement/course/index.shtml" target="_blank">课程协议</a> 
+                    </div>
+                    <div class="pull-right right">
+                        应付金额：<span id="price"></span>
+                    </div>
+                </div>
+               <!--  <div class="d5 text-right">
+                    <button id="toBuy">立即支付</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- wxpay model -->
+    <div style="display: none;">
+        <div id="js_wxpay" class="md-20190729-cj-wxpay">
+            <!-- <div class="overlay"></div> -->
+            <div class="pay-wrp clearfix">
+                <span class="close-btn pull-right"><i class="cusfont cusfont-close font-14 js-closewin-btn"></i></span>
+                <div class="cont">
+                    <p id="js_wxDuration" class="time">&nbsp;</p>
+                    <p id="js_wxMoney" class="money">微信支付 ¥0.00</p>
+                    <div id="js_wxQR" class="qr-wrp"></div>
+                    <p class="info">使用微信扫描二维码进行支付</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="form_pay" style="display:none;"></div>
+    <!--底部的东西-->
+			<div class="o-hiyd-footer">
+				<div class="o-footer-row">
+					<a class="footer-nav-link" href="https://www.11467.com/qiye/35839987.htm" target='_blank'>关于偶家</a>|
+					<span>Copyright (C) 2019 www.hiyd.com 版权所有 广州市偶家科技有限公司</span>
+				</div>
+				<div class="o-footer-row">
+					<span>粤网文（2015）1655-286号</span> | <span>粤ICP备15035085号-3</span>
+				</div>
+			</div>
+	
+
+    <!-- <script src="http://cdn.tmooc.cn/tmooc-web/js/customScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="http://cdn.tmooc.cn/tmooc-web/js/kindeditor/kindeditor-min.js"></script>
+    <script src="http://cdn.tmooc.cn/tmooc-web/js/colorbox/jquery.colorbox-min.js"></script>
+    <script src="http://cdn.tmooc.cn/tmooc-web/js/qrcode/qrcode.min.js"></script>
+    <script src="http://cdn.tmooc.cn/tmooc-web/js/layer/layer.js"></script>
+    <script src="http://cdn.tmooc.cn/tmooc-web/js/app.js"></script> -->
+    
+    <script>
+   
+	
+    var orderStatus;
+    /**
+     * 跳转到支付中心
+     */
+    function toPaymentCenter(orderType,orderId){
+    	window.open(UC_PATH_ + "/tmoocPay/toPaymentCenter?orderType="+orderType+"&orderId="+orderId);
+    	openPayStatusFn(); //打开支付状态弹窗
+    }
+    /**
+     * 创建微信扫码支付订单
+     */
+    function wxNativeCreateOrder(orderType,orderId){
+        $.ajax({
+        	url : UC_PATH_+"/tmoocPay/wxPayPcCreateOrder",
+            type: "post", 
+            dataType: "json",
+            data:{
+            	orderType : orderType,
+            	orderId : orderId
+            },
+            success: function (data) {
+            	
+            	if(data && data.code == "1"){
+            		//创建订单成功
+    				wxPayModel({ 
+    					money: data.obj.price, 
+    					qrcode: data.name 
+    				})
+    				//轮询查询订单状态
+    				//setInterval 每隔3000ms执行一次
+    				var startTimes = new Date().getTime();
+    				var times = 15*60*1000;
+    				 orderStatus = setInterval(function(){
+    					var now = new Date().getTime();
+    					if((now-startTimes)>times){
+    						window.location.reload();
+    					}else{
+    						$.ajax({
+    							type: "POST",
+    							url: UC_PATH_ + "/tmoocPay/findOrderStatus",
+    							data: { 
+    								"orderNumber": data.id ,
+    								orderType : orderType
+    							},
+    							dataType: "json",
+    							success: function (result) {
+    								if(result.code == 1){
+    									clearInterval(orderStatus);
+    									$.colorbox.close();
+    									//跳转到课程详情页
+    									layer.msg('购买成功,3秒后自动跳转...');
+						        		setTimeout(function () {
+						                    //跳转到tmooc首页
+						                    window.location.href=result.obj;
+						                }, 3000)
+    								}
+    							}
+    						})
+    					}
+    					
+    				},3000)
+            	}
+            	if(data && data.code == "-8001"){
+            		$('#toBuy').attr("disabled",false);
+            		layer.msg("请登录！");
+            	}
+            	if(data && data.code == "-1120"){
+            		$('#toBuy').attr("disabled",false);
+                    layer.msg("已经购买过啦！");
+                }
+            	if(data && data.code == "-1"){
+                    layer.msg("系统异常，请稍后重试！");
+                }
+            }
+        })
+    }
+
+
+    /**
+     * 支付宝支付
+     */
+    function alipayCreateOrder(orderType,orderId){
+    	var data = {orderType:orderType};
+    	if(orderType == '10011001'){
+    		data.courseId = orderId;
+    	}
+    	if(orderType == '10011002'){
+    		data.cardTypeId = orderId;
+    	}
+    	var url = UC_PATH_ + "/tmoocPay/createOrder";
+    	$.ajax({
+    		type: "POST",
+    		url: url,
+    		data: data,
+    		dataType: "json",
+    		success: function (result) {
+    			if (result.code == 1) {
+    				var d = result.obj.split('<form');
+            		d[0] = '<form ';
+                    d=d.join('');
+                    d=d.slice(0, d.indexOf('<script>'));
+                    $('#form_pay').html(d);
+            		
+    		        $('#alipaysubmit').submit(); //提交表单
+
+    			} else {
+    				$('#toBuy').attr("disabled",false);
+    				layer.msg("调取接口失败，请稍后重试！");
+    			}
+
+    		},
+    		error: function () {
+    			console.info("error");
+    		}
+    	});
+    }
+        function wxPayModel(opts) {
+            var options = $.extend(true, {
+                money: 0.00,
+                duration: 15 * 60,
+                qrcode: '',
+                onOpen: ''
+            }, opts);
+            var timer = null;
+            var dy_time = function (sec) {
+                var _min = Math.ceil(sec / 60) - 1;
+                var _sec = (sec % 60) || '60';
+
+                $('#js_wxDuration').html('请在 ' + _min + ' 分钟 ' + _sec + ' 秒内完成支付');
+            }
+            $('#js_wxMoney').html('微信支付 ¥' + options.money);
+            $.colorbox && $.colorbox.close();
+
+            $.colorbox({
+                escKey: false,
+                inline: true,
+                overlayClose: false,
+                closeButton: false,
+                href: '#js_wxpay',
+                onComplete: function (inst) {
+                    // 计时
+                    if (options.duration > 0) {
+                        var _sec = options.duration;
+                        dy_time(_sec);
+                        clearInterval(timer);
+                        timer = setInterval(function () {
+                            if (_sec <= 1) {
+                                clearInterval(timer);
+                                $.colorbox && $.colorbox.close();
+                                return
+                            }
+                            _sec--;
+                            dy_time(_sec);
+                        }, 1000)
+                    }
+                    // qr-code
+                    new QRCode($('#js_wxQR')[0], {
+                        text: options.qrcode,
+                        width: 200,
+                        height: 200
+                    });
+
+                    options.onOpen && options.onOpen(inst);
+                },
+                onClosed: function () {
+                    clearInterval(timer);
+                    clearInterval(orderStatus);
+                    $('#toBuy').attr("disabled",false);
+                    $('#js_wxQR img').attr('src','');
+                }
+            })
+        }
+        
+        function findOrderMsg(orderType,orderId){
+        	$.ajax({
+        		type: "POST",
+    			url: UC_PATH_ + "/m/tmoocPay/findOrderMsg",
+    			data: { "orderType": orderType, "orderId": orderId },
+    			dataType: "json",
+    			success: function (result) {
+    				if(result.obj.orderImgUrl){
+	    				$('#order-url').attr('src',result.obj.orderImgUrl);
+    				}else{
+    					$('#order-url').attr('src',"http://cdn.tmooc.cn/tmooc-web/css/img/20190801-vip-card.png");
+    				}
+    				
+    					$('#order-name').html(result.obj.goodsName);
+    					$('#price').html(result.obj.price);
+    				}
+        	})
+        }
+        function SetPay(){
+        	debugger
+        	var fee=localStorage.getItem("fee");
+      	  var className=localStorage.getItem("className");
+      	  var orderId=localStorage.getItem("orderId");
+      	 $("#orderId")[0].value=orderId;
+      	 $("#className")[0].value=className;
+      	 $("#money")[0].value=fee;
+      	$("#orderIdA")[0].innerText="订单号:"+orderId;
+      	$("#classNameA")[0].innerText="课程名:"+className;
+      	$("#moneyA")[0].innerText="价格:"+fee;
+      	 var a=$("#orderIdA");
+      	 var d=$("#className");
+      	 var c=$("#money");
+      	 var b=0;
+      	 
+        }
+        $(function () {
+        	debugger
+        	SetPay();
+        	//切换支付方式
+        	$("#alibaba").click(function(){
+        	  
+        	    	var b=$("#alipay");
+        	    	b[0].checked="true";
+        	});
+        	$("#tengxun").click(function(){
+    	    	
+    	    	var b=$("#qqpay");
+    	    	b[0].checked="true";
+    	});
+        	$("#qq").click(function(){
+    	    	
+    	    	var b=$("#tengxunpay");
+    	    	b[0].checked="true";
+    	});
+        	$('.pay-list').click(function(){
+        		$('.pay-list').removeClass('active');
+        	    $(this).addClass('active');
+        	});
+	        	/* var orderType= get_hash('orderType');
+	        	var orderId = get_hash('orderId');
+        	//获取商品详情
+        	findOrderMsg(orderType,orderId)
+        	//切换支付方式
+        	$('.pay-list').click(function(){
+        		$('.pay-list').removeClass('active');
+        	    $(this).addClass('active');
+        	}); */
+        	
+        	/* 创建订单，发起支付 */
+        	/* $('#toBuy').click(function(){
+        		//支付宝支付
+            	$('#toBuy').attr("disabled",true);
+                if(!$("#courseService").is(":checked")){
+                	$('#toBuy').attr("disabled",false);
+                    layer.msg("请知晓并勾选左下方的课程服务协议！");
+                    return false;
+                }
+        		var type = $('.pay-list.active').data('type');
+        		if(type == 'wx'){
+        			//微信支付
+        			wxNativeCreateOrder(orderType,orderId);
+        		}
+                if(type == 'alipay'){
+                	
+                	//支付宝支付
+                	alipayCreateOrder(orderType,orderId);
+                }
+            }); */
+        });
+    </script>
+</body>
+
+</html>

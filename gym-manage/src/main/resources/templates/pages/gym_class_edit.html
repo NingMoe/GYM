@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+<meta charset="UTF-8">
+<title>课程修改</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+<link rel="stylesheet" href="./css/font.css">
+<link rel="stylesheet" href="./css/xadmin.css">
+<script type="text/javascript" src="./lib/layui/layui.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]> <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script> 
+								<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script> 
+								<![endif] -->
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<form class="layui-form">
+				<div class="layui-form-item">
+					<label for="L_email" class="layui-form-label"> <span
+						class="x-red">*</span> 课程编号
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="c_id" name="email" required=""
+							lay-verify="email" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<!-- <div class="layui-form-mid layui-word-aux">
+						<span class="x-red">*</span>将会成为您唯一的登入名</div>
+					</div> -->
+				<div class="layui-form-item">
+					<label for="L_username" class="layui-form-label"> <span
+						class="x-red">*</span> 课程名
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="c_name" name="username" required=""
+							lay-verify="nikename" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_username" class="layui-form-label"> <span
+						class="x-red">*</span> 图片
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="c_picUrl" name="username" required=""
+							lay-verify="nikename" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_username" class="layui-form-label"> <span
+						class="x-red">*</span> 课程描述
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="c_description" name="username" required=""
+							lay-verify="nikename" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+		</div>
+		<div class="layui-form-item">
+			<label for="L_username" class="layui-form-label"> <span
+				class="x-red">*</span> 课程教练编号
+			</label>
+			<div class="layui-input-inline">
+				<input type="text" id="c_coachId" name="username" required=""
+					lay-verify="nikename" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label for="L_username" class="layui-form-label"> <span
+				class="x-red">*</span> 课程价格
+			</label>
+			<div class="layui-input-inline">
+				<input type="text" id="c_price" name="username" required=""
+					lay-verify="nikename" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+	<div class="layui-form-item">
+			<label for="L_repass" class="layui-form-label"></label>
+			<button class="layui-btn" lay-filter="add" lay-submit="">修改</button>
+		</div>
+		</form>
+	</div>
+	</div>
+
+
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+
+		$(function() {
+			$(".layui-form-item").on("click", ".layui-btn", doUpdateObject)
+		});
+
+		$(function(){		  
+			   doGetObjects();		  
+	});
+	function doGetObject(){
+		   //debugger;//断点调试
+		   //1.定义url和参数
+		   var url="class/doFindObjectByName"
+		   var params={"pageCurrent":1};//pageCurrent=2
+		   //2.发起异步请求
+		   //请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范
+	       $.getJSON(url,params,function(result){
+	//JsonResult->PageObject->List<SysLogs>+...
+			   //请问result是一个字符串还是json格式的js对象？对象
+	    	        doHandleResponseResult(result);
+			 }
+		   );//特殊的ajax函数
+	   }
+	function doHandleResponseResult (result){ //JsonResult
+		   if(result.state==1){//ok
+			//更新table中tbody内部的数据
+			doSetTableBodyRows(result.data.records);//将数据呈现在页面上 
+			//更新页面page.html分页数据
+			//doSetPagination(result.data); //此方法写到page.html中
+		    }else{
+			alert(result.msg);
+		    }  
+	 }
+	function doSetTableBodyRows(records){
+		   //1.获取tbody对象，并清空对象
+		   var tBody=$("#tbodyId");
+		   tBody.empty();
+		   //2.迭代records记录，并将其内容追加到tbody
+		   for(var i in records){
+			   //2.1 构建tr对象
+			   var tr=$("<tr></tr>");
+			   tr.data("id",records[i].id);
+			   tr.data("name",records[i].name);
+			   
+			   //2.2 构建tds对象
+			   var tds=doCreateTds(records[i]);
+			   /* <td class="td-status">
+            <span class="layui-btn layui-btn-danger layui-btn-mini"> 删除</span> */
+			   //2.3 将tds追加到tr中
+			   tr.append(tds);
+			   //2.4 将tr追加到tbody中
+			   tBody.append(tr);
+		   }
+	   }
+	 function doCreateTds(data){
+		   var tds="<td><input type='checkbox' name='id' value='"+data.id+"' lay-skin='primary'></td>"+
+			   	 "<td>"+data.id+"</td>"+
+			     "<td>"+data.name+"</td>"+
+			     "<td>"+data.picUrl+"</td>"+
+			     "<td>"+data.description+"</td>"+
+			     "<td>"+data.coachId+"</td>"+
+			     "<td>"+data.price+"</td>"+
+			     "<td>"+data.number+"</td>"+			
+			return tds;
+	   }
+	 
+	 function doUpdateObject(){
+	    	console.log("update...")
+	    	//1.参数(表单数据)
+	    	var params=doGetEditFormData();
+	    	if(!params.name){
+	    		alert("角色名不能为空");
+	    		return;
+	    	}
+	    	/* var data=$("#mainContentId").data("data");
+	    	if(data)params.id=data.id; */
+	    	//2.url
+	    	var url="class/doUpdateObject";
+	    	//3.ajax request
+	    	$.post(url,params,function(result){
+	    		if(result.state==1){
+	    		   alert(result.message);
+	    		   doCancel();
+	    		}else{
+	    		   alert(result.message);
+	    		}
+	    	})
+	    }
+	</script>
+</body>
+
+</html>
