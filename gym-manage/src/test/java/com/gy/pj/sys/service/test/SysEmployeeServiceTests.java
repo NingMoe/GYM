@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gy.pj.sys.entity.SysEmployee;
-import com.gy.pj.sys.service.SysEmployeeService;
+import com.gym.entity.SysEmployee;
+import com.gym.service.SysEmployeeService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

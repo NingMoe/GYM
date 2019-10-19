@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gy.pj.sys.dao.SysCmtDao;
-import com.gy.pj.sys.entity.SysCmt;
+import com.gym.dao.SysCmtDao;
+import com.gym.entity.SysCmt;
 
 
 @RunWith(SpringRunner.class)

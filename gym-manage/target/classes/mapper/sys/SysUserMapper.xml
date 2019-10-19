@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysUserDao">
+<mapper namespace="com.gym.dao.SysUserDao">
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysUser" useGeneratedKeys="true"
+		parameterType="com.gym.entity.SysUser" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into gym_user
 		(id,username,password,sex,icon,email,intro)
@@ -29,7 +29,7 @@
 
 
 	<update id="updateObject"
-		parameterType="com.gy.pj.sys.entity.SysUser">
+		parameterType="com.gym.entity.SysUser">
 		update gym_user <!-- set sex=#{sex},icon=#{icon},email=#{email},intro=#{intro} 
 			where id=#{id} -->
 		<set>
@@ -52,7 +52,7 @@
 
 	<!-- 基于角色Name查询角色信息 -->
 	<select id="findObjectByUsername"
-		resultType="com.gy.pj.sys.entity.SysUser">
+		resultType="com.gym.entity.SysUser">
 		select id,username,password,sex,icon,email,intro
 		from
 		gym_user
@@ -60,14 +60,14 @@
 	</select>
 
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysUser">
+		resultType="com.gym.entity.SysUser">
 		select *
 		from gym_users
 		<include refid="queryWhereId" />
 		order by id
 	</select>
 	<select id="findUserByUserName"
-		resultType="com.gy.pj.sys.entity.SysUser">
+		resultType="com.gym.entity.SysUser">
 		select *
 		from gym_users
 		where username=#{username}

@@ -1,6 +1,6 @@
 #server
 server:
-  port: 80
+  port: 84
   servlet:
     context-path: /
   tomcat:
@@ -32,7 +32,7 @@ mybatis:
     default-statement-timeout: 30
     map-underscore-to-camel-case: true
   mapper-locations: classpath:/mapper/sys/*.xml
-  typeAliasesPackage: com.gy.pj.sys.entity
+  typeAliasesPackage: com.gym.entity
 
 #springmvc
 #lOG
