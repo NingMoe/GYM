@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysCmtDao">
+<mapper namespace="com.gym.dao.SysCmtDao">
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysClass" useGeneratedKeys="true"
+		parameterType="com.gym.entity.SysClass" useGeneratedKeys="true"
 		keyProperty="id">
 		insert into gym_cmt
 		(id,username,cmt)
@@ -30,7 +30,7 @@
 
 	<!-- 基于角色Name查询角色信息 -->
 	<select id="findObjectByUsername"
-		resultType="com.gy.pj.sys.entity.SysCmt">
+		resultType="com.gym.entity.SysCmt">
 		select id,username,cmt
 		from
 		gym_cmt
@@ -38,7 +38,7 @@
 	</select>
 
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysCmt">
+		resultType="com.gym.entity.SysCmt">
 		select *
 		from gym_cmt
 		<include refid="queryWhereId" />

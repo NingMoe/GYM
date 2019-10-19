@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysStudentDao">
-  <resultMap id="BaseResultMap" type="com.gy.pj.sys.entity.SysStudent">
+<mapper namespace="com.gym.dao.SysStudentDao">
+  <resultMap id="BaseResultMap" type="com.gym.entity.SysStudent">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gender" jdbcType="CHAR" property="gender" />
@@ -19,7 +19,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   
-  <insert id="insert" parameterType="com.gy.pj.sys.entity.SysStudent">
+  <insert id="insert" parameterType="com.gym.entity.SysStudent">
     insert into gym_student (id, `name`, gender, 
       age, height, weight, 
       phoneNumber, email, address, 
@@ -30,7 +30,7 @@
       #{createdTime,jdbcType=VARCHAR})
   </insert>
   
-  <update id="updateByPrimaryKey" parameterType="com.gy.pj.sys.entity.SysStudent">
+  <update id="updateByPrimaryKey" parameterType="com.gym.entity.SysStudent">
     update gym_student
     set `name` = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
@@ -56,7 +56,7 @@
   </select>
   
   <!-- 实现翻页查询操作 -->
-	<select id="findPageObjects" resultType="com.gy.pj.sys.entity.SysStudent">
+	<select id="findPageObjects" resultType="com.gym.entity.SysStudent">
 		select * from gym_student
 		<include refid="queryWhereId" />
 		<!-- 重复记录提取 -->
@@ -84,7 +84,7 @@
 			#{id}
 		</foreach>
 	</delete>
-	<select id="findById" resultType="com.gy.pj.sys.entity.SysStudent">
+	<select id="findById" resultType="com.gym.entity.SysStudent">
 		select * from gym_student
 		where id=#{id}
 	</select>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysCoachDao">
+<mapper namespace="com.gym.dao.SysCoachDao">
 	<!-- 查询当前页，resultType为一行记录映射的类型 -->
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysCoach">
+		resultType="com.gym.entity.SysCoach">
 		select *
 		<include refid="queryWhereId" />
 		<!-- 重复记录提取 -->
@@ -34,14 +34,14 @@
 		</foreach>
 	</delete>
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysCoach">
+		parameterType="com.gym.entity.SysCoach">
 		insert into gym_coach
 		(id,name,gender,groupId,tecDirection,stuNumber,tecNumber)
 		values
 		(null,#{name},#{gender},#{groupId},#{tecDirection},#{stuNumber},#{tecNumber})
 	</insert>
 	<update id="updateObject"
-		parameterType="com.gy.pj.sys.entity.SysCoach">
+		parameterType="com.gym.entity.SysCoach">
 		update gym_coach set
 		name=#{name},
 		gender=#{gender},
@@ -51,7 +51,7 @@
 		tecNumber=#{tecNumber}
 		where id=#{id}
 	</update>
-	<select id="findById" resultType="com.gy.pj.sys.entity.SysCoach">
+	<select id="findById" resultType="com.gym.entity.SysCoach">
 		select * from gym_coach
 		where id=#{id}
 	</select>

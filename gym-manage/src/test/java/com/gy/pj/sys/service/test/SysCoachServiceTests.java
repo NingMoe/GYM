@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gy.pj.sys.entity.SysCoach;
-import com.gy.pj.sys.entity.SysCoachGroup;
-import com.gy.pj.sys.service.SysCoachService;
+import com.gym.entity.SysCoach;
+import com.gym.entity.SysCoachGroup;
+import com.gym.service.SysCoachService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

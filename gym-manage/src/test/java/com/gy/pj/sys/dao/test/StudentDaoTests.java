@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gy.pj.sys.dao.SysStudentDao;
-import com.gy.pj.sys.entity.SysStudent;
+import com.gym.dao.SysStudentDao;
+import com.gym.entity.SysStudent;
 
 
 

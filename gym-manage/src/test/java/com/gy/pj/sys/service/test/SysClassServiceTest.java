@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.gy.pj.common.vo.PageObject;
-import com.gy.pj.sys.entity.SysClass;
-import com.gy.pj.sys.service.SysClassService;
+import com.gym.entity.SysClass;
+import com.gym.service.SysClassService;
+import com.gym.vo.PageObject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
