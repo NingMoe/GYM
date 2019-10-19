@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysStudentDao">
+<mapper namespace="com.gym.dao.SysStudentDao">
 	<!-- 实现翻页查询操作 -->
-	<select id="findPageObjects" resultType="com.gy.pj.sys.entity.SysStudent">
+	<select id="findPageObjects" resultType="com.gym.entity.SysStudent">
 		select * from gym_student
 		<include refid="queryWhereId" />
 		<!-- 重复记录提取 -->

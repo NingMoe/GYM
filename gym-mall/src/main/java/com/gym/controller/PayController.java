@@ -5,9 +5,9 @@ package com.gym.controller;
 //import org.springframework.stereotype.Controller;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //
-//import com.gy.pj.sys.dao.PayDao;
-//import com.gy.pj.sys.entity.Pay;
-//import com.gy.util.PayJson;
+//import com.gym.dao.PayDao;
+//import com.gym.entity.Pay;
+//import com.gym.util.PayJson;
 //
 //@Controller 
 //@RequestMapping("pay")
