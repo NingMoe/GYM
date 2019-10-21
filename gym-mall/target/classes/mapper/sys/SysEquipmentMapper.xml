@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysEquipmentDao">
+<mapper namespace="com.gym.dao.SysEquipmentDao">
 
 	<select id="findObjectByName"
-		resultType="com.gy.pj.sys.entity.SysEquipment">
+		resultType="com.gym.entity.SysEquipment">
 		select *
 		from
 		gym_equipment
@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysEquipment">
+		resultType="com.gym.entity.SysEquipment">
 		select *
 		from gym_equipment
 		<include refid="queryWhereId" />
