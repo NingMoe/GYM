@@ -96,5 +96,6 @@
 		<module>gym-manage</module>
 		<module>gym-mall</module>
 		<module>gym-warehouse</module>
+		<module>111</module>
 	</modules>
 </project>
