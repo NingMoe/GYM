@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.gy.pj.sys.dao.SysCoachDao">
+  <mapper namespace="com.gym.dao.SysCoachDao">
   
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysCoach">
+		resultType="com.gym.entity.SysCoach">
 		select *
 		<include refid="queryWhereId" />
 		limit #{startIndex},#{pageSize}

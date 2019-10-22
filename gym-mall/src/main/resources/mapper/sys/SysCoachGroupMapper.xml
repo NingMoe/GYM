@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gy.pj.sys.dao.SysCoachGroupDao">
+<mapper namespace="com.gym.dao.SysCoachGroupDao">
 	<select id="findPageObjects"
-		resultType="com.gy.pj.sys.entity.SysCoachGroup">
+		resultType="com.gym.entity.SysCoachGroup">
 		select * from gym_coachgroup
 		<include refid="queryWhereId" />
 		order by
@@ -28,19 +28,19 @@
 		</where>
 	</sql>
 	<insert id="insertObject"
-		parameterType="com.gy.pj.sys.entity.SysCoachGroup">
+		parameterType="com.gym.entity.SysCoachGroup">
 		insert into gym_coachGroup (groupId,tecDirection,coachNumber,classNumber)
 		values (null,#{tecDirection},#{coachNumber},#{classNumber})
 	</insert>
 	<update id="updateObject"
-		parameterType="com.gy.pj.sys.entity.SysCoachGroup">
+		parameterType="com.gym.entity.SysCoachGroup">
 		update gym_coachGroup set
 		tecDirection=#{tecDirection},
 		coachNumber=#{coachNumber},
 		classNumber=#{classNumber}
 		where groupId=#{groupId}
 	</update>
-	<select id="findById" resultType="com.gy.pj.sys.entity.SysCoachGroup">
+	<select id="findById" resultType="com.gym.entity.SysCoachGroup">
 		select * from gym_coachgroup
 		where groupId=#{groupId}
 	</select>
