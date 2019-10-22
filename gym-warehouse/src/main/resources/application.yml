@@ -1,6 +1,6 @@
 #server
 server:
-  port: 84
+  port: 85
   servlet:
     context-path: /
   tomcat:
@@ -26,13 +26,12 @@ spring.servlet.multipart.file-size-threshold: 0
 spring.servlet.multipart.maxFileSize: 100MB
 #总数据的大小
 spring.servlet.multipart.maxRequestSize: 100MB
-#mybatis
-mybatis:
+#mybatis-plush配置
+mybatis-plus:
+  type-aliases-package: com.jt.pojo
+  mapper-locations: classpath:/mybatis/mappers/*.xml
   configuration:
-    default-statement-timeout: 30
     map-underscore-to-camel-case: true
-  mapper-locations: classpath:/mapper/sys/*.xml
-  typeAliasesPackage: com.gym.entity
 
 #springmvc
 #lOG
