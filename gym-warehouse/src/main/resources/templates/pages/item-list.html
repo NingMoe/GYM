@@ -2,7 +2,7 @@
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
-        <title>供应商列表</title>
+        <title>欢迎页面-X-admin2.2</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -39,7 +39,7 @@
                                     <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
                                 </div> -->
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
+                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加供应商','./supplier-add.html',600,400)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加商品','./item-add.html',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form">
@@ -57,12 +57,15 @@
                                     <th>
                                       <input type="checkbox" lay-filter="checkall" name="" lay-skin="primary">
                                     </th>
-                                    <th>供应商编码</th>
-                                    <th>供应商名称</th>
-                                    <th>地址</th>
-                                    <th>联系人</th>
-                                    <th>联系方式</th>
-                                    <th>操作</th>
+                                    <th>商品编号</th>
+                                    <th>商品名称</th>
+                                    <th>主图</th>
+                                    <th>规格参数</th>
+                                    <th>单位</th>
+                                    <th>价格</th>
+                                    <th>供应商</th>
+                                    <th>创建时间</th>
+                                    <th>操作</th></tr>
                                 </thead>
                                 <tbody>
                                   <tr>
@@ -70,13 +73,21 @@
                                       <input type="checkbox" name="id" value="1"   lay-skin="primary"> 
                                     </td>
                                     <td>1</td>
-                                    <td>xxxx股份有限公司</td>
-                                    <td>北京市 海淀区</td>
                                     <td>小明</td>
-                                    <td>13011112222</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>男</td>
+                                    <td>13000000000</td>
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -89,12 +100,20 @@
                                     </td>
                                     <td>1</td>
                                     <td>小明</td>
-                                    <td>小明</td>
                                     <td>男</td>
                                     <td>13000000000</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -107,12 +126,20 @@
                                     </td>
                                     <td>1</td>
                                     <td>小明</td>
-                                    <td>小明</td>
                                     <td>男</td>
                                     <td>13000000000</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -125,12 +152,20 @@
                                     </td>
                                     <td>1</td>
                                     <td>小明</td>
-                                    <td>小明</td>
                                     <td>男</td>
                                     <td>13000000000</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -143,12 +178,20 @@
                                     </td>
                                     <td>1</td>
                                     <td>小明</td>
-                                    <td>小明</td>
                                     <td>男</td>
                                     <td>13000000000</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -161,12 +204,20 @@
                                     </td>
                                     <td>1</td>
                                     <td>小明</td>
-                                    <td>小明</td>
                                     <td>男</td>
                                     <td>13000000000</td>
-                                    <td class="td-manage td-status">
-                                      <a title="编辑"  onclick="xadmin.open('编辑','supplier-edit.html',600,400)" href="javascript:;">
+                                    <td>北京市 海淀区</td>
+                                    <td class="td-status">
+                                      <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+                                    <td class="td-manage">
+                                      <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
+                                        <i class="layui-icon">&#xe601;</i>
+                                      </a>
+                                      <a title="编辑"  onclick="xadmin.open('编辑','member-edit.html',600,400)" href="javascript:;">
                                         <i class="layui-icon">&#xe642;</i>
+                                      </a>
+                                      <a onclick="xadmin.open('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                                        <i class="layui-icon">&#xe631;</i>
                                       </a>
                                       <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>

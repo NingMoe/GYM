@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>后台登录-X-admin2.2</title>
+<title>仓库管理系统</title>
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -125,14 +125,37 @@
                                     <cite>供应商管理</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('采购订单','order-listx.html')">
+                                <a onclick="xadmin.add_tab('采购申请','purchase-request.html')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>采购订单</cite></a>
+                                    <cite>采购申请</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('退货订单','order-return.html')">
+                                <a onclick="xadmin.add_tab('待采购订单','purchase-listx.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>待采购订单</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('退货订单','purchase-return.html')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>退货订单</cite></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont left-nav-li" lay-tips="商品管理">&#xe723;</i>
+                            <cite>商品管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i></a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a onclick="xadmin.add_tab('商品入库','in-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>商品入库</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('商品列表','item-list.html')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>商品列表</cite></a>
                             </li>
                         </ul>
                     </li>
