@@ -28,7 +28,7 @@ spring.servlet.multipart.maxFileSize: 100MB
 spring.servlet.multipart.maxRequestSize: 100MB
 #mybatis-plush配置
 mybatis-plus:
-  type-aliases-package: com.jt.pojo
+  type-aliases-package: com.gym.pojo
   mapper-locations: classpath:/mybatis/mappers/*.xml
   configuration:
     map-underscore-to-camel-case: true
@@ -51,6 +51,8 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+  
+
  
 
       
