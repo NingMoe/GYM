@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.dao.SysAccountDao">
+	<select id="getRowCount" resultType="int">
+		select count(*) from gym_Account
+		<include refid="queryWhereId" />
+	</select>
+	<select id="findObjectByAccount" resultType="int">
+		select count(*) from gym_Account where name=#{name}
+	</select>
+	<select id="login" resultType="int">
+		select count(*) from gym_Account where account=#{account} and pass=#{pass}
+	</select>
+	<sql id="queryWhereId">
+		<where>
+			<if test="name!=null and name!=''">
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+	<!-- 添加 -->
+	<insert id="insertObject">
+         insert into gym_Account (id,account,pass) 
+         values(null,#{account},#{pass})
+    </insert>
+    <!-- 修改 -->
+	<update id="updateObject">
+       update gym_Account
+       set pass=#{pass},name=#{name},phoneNumber=#{phoneNumber},email=#{email} 
+       where id=#{id}
+   </update>
+</mapper>

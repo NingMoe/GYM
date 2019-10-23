@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.dao.SysOrderDao">
+
+	<insert id="insertObject"
+		parameterType="com.gym.entity.SysOrder" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into gym_orders
+		(id,user_name,phone_number,class_name,price,order_time,order_id) values(#{id},#{user_name},#{phone_number},#{class_name},#{price},now(),#{order_id})
+	</insert>
+	
+	<!-- 基于角色Name查询角色信息 -->
+	<select id="findObjectByClassName"
+		resultType="com.gym.entity.SysOrder">
+		select *
+		from gym_orders
+		where userName=#{userName}
+	</select>
+
+	<select id="findPageObjects"
+		resultType="com.gym.entity.SysOrder">
+		select id,class_name,price,order_time,pay_time,pay_type,pay_state
+		from gym_orders
+		<include refid="queryWhereId" />
+		<!-- order by createdTime desc -->
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		from gym_orders
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="userName!=null and userName!=''">
+				userName like concat("%",#{userName},"%")
+			</if>
+		</where>
+	</sql>
+
+</mapper>

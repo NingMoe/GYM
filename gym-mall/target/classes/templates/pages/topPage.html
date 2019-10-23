@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<!--兼容设置，为了使页面在不同浏览器中表现正常。如果IE有安装Google Chrome Frame，那么就走安装的组件，如果没有就和<meta http-equiv="X-UA-Compatible" content="edge" />一样。-->
+<meta name="renderer" content="webkit" />
+<!--默认用极速核，保证自动切核准确率，保证网页跑起来-->
+<meta name="applicable-device" content="pc">
+<title>Hi运动健身网-合理健身增肌、健康减肥瘦身、科学饮食运动</title>
+<link rel="stylesheet" href="../css/HomePage_Top.css" />
+<base target="_parent">
+		<script src="./js/jquery.min.js"></script>
+        <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+<body>
+	<div class="o-header2" th:fragment="topbar">
+		<div class="o-header2_inner">
+			<a href="./HomePage.html" class="o-header_logo"> 
+				<img src="../img/Logo.PNG" />
+			</a>
+			<div class="o-header2-nav">
+				<div data-hicms-tmpl="hiyd-nav">
+					<div>
+						<a href="./FitnessClass.html" target='_self' class="item">特色课程</a>
+						<a href="./Coach.html" target='_self' class="item">优质教练</a>
+						<a href="./FoodPage.html" target='_self' class="item">健身饮食</a>
+						<a href="./EquipmentPage.html" target='_self' class="item">健身器材</a>
+						<a href="./CommentsPage.html" target='_self' class="item">社区精选</a>
+						<a href="./huodong.html" target='_self' class="item">近期活动</a>
+					</div>
+				</div>
+				<!-- <div class="item-group">
+							<span id="btn_ouj_login">
+								<a id="login" href="./LoginPage.html" 
+
+target='_self' class="loading" style="display:blcok">登录</a>
+							</span>
+							<span id="btn_ouj_register">
+								<a id="register" href="./SignPage.html" 
+
+target='_self' class="login" style="display:blcok">注册</a>
+							</span>
+							
+							
+								<a href="./Personer-Accou.html" 
+
+target='_self' class="login" id="user" style="display:none">name</a>
+							
+						</div> -->
+			</div>
+			<div class="o-header_ctrl"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+$(function() {
+	display();
+});
+
+
+function display(){
+	debugger
+	var state=localStorage.getItem("state");
+	//如果用户未登录,把其隐藏
+	if(state==1){
+		debugger
+		var text = document.getElementById("btn_ouj_user");
+		var a=$("#user");
+		a[0].text=localStorage.getItem("account");
+		a[0].style.display="inline-block";
+		var a=$("#login");
+		a[0].text="";
+		var a=$("#register");
+		a[0].text="";
+	}
+</script>
+</html>

@@ -1,0 +1,47 @@
+#server
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    max-threads: 1000
+
+#spring
+spring:
+  datasource:
+    url: jdbc:mysql://176.55.9.157:3306/gym?serverTimezone=GMT
+    username: root
+    password: root
+  thymeleaf:
+    prefix: classpath:/templates/pages/
+    suffix: .html
+  aop:
+    proxy-target-class: false
+
+
+#mybatis
+mybatis:
+  configuration:
+    default-statement-timeout: 30
+    map-underscore-to-camel-case: true
+  mapper-locations:
+  - classpath:/mapper/sys/*.xml
+
+#springmvc
+#lOG
+logging:
+  level:
+    com.py: DEBUG
+    
+#Thread rool
+async-thread-pool:
+  corePoolSize: 5
+  maximumPoolSize: 10
+  keepAliveTime: 30
+         
+    
+    
+    
+    
+    
+    

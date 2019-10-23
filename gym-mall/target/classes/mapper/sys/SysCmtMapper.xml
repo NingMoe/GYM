@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.dao.SysCmtDao">
+	<insert id="insertObject"
+		parameterType="com.gym.entity.SysClass" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into gym_cmt
+		(id,username,cmt)
+		values
+		(#{id},#{username},#{cmt})
+	</insert>
+
+	<delete id="deleteObject" parameterType="int">
+		delete
+		from gym_cmt
+		where id=#{id}
+	</delete>
+	<delete id="deleteObjects">
+		delete from gym_cmt
+		where id in
+		<!-- 这里的collection值是之前注解parm定义的 -->
+		<foreach collection="ids" open="(" close=")" separator=","
+			item="id">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<!-- 基于角色Name查询角色信息 -->
+	<select id="findObjectByUsername"
+		resultType="com.gym.entity.SysCmt">
+		select id,username,cmt
+		from
+		gym_cmt
+		where username=#{username}
+	</select>
+
+	<select id="findPageObjects"
+		resultType="com.gym.entity.SysCmt">
+		select *
+		from gym_cmt
+		<include refid="queryWhereId" />
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		from gym_cmt
+		<include refid="queryWhereId" />
+	</select>
+
+
+	<sql id="queryWhereId">
+		<where>
+			<if test="username!=null and username!=''">
+				username like concat("%",#{username},"%")
+			</if>
+		</where>
+	</sql>
+
+</mapper>
