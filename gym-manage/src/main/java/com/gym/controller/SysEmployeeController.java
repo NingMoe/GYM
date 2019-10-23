@@ -37,7 +37,7 @@ public class SysEmployeeController extends BaseController{
 	public JsonResult doDeleteObject(Integer... ids){
 		sysEmployeeService.deleteObject(ids);
 		return new JsonResult("delete ok");
-	}
+	}                                                               
 	@RequestMapping("doFindObject")
 	@ResponseBody
 	public JsonResult doFindObject(String name,
