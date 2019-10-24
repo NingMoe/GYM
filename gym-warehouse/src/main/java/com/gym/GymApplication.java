@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.gym.*.mapper")
+@MapperScan("com.gym.mapper")
 public class GymApplication {
 	public static void main(String[] args) {		
 		SpringApplication.run(GymApplication.class, args);
