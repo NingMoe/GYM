@@ -1,0 +1,395 @@
+<!doctype html>
+<html class="x-admin-sm">
+<head>
+<meta charset="UTF-8">
+<title>供应商列表</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<link rel="stylesheet" href="css/font.css">
+<link rel="stylesheet" href="css/xadmin.css">
+<script src="lib/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/xadmin.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+	<div class="x-nav">
+		<span class="layui-breadcrumb"> <a href="">首页</a> <a href="">演示</a>
+			<a> <cite>导航元素</cite></a>
+		</span> <a class="layui-btn layui-btn-small"
+			style="line-height: 1.6em; margin-top: 3px; float: right"
+			onclick="location.reload()" title="刷新"> <i
+			class="layui-icon layui-icon-refresh" style="line-height: 30px"></i></a>
+	</div>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					
+					<div class="layui-card-header">
+						<!-- <button class="layui-btn layui-btn-danger" id="deleteAll1">
+							<i class="layui-icon"></i>批量删除
+						</button> -->
+						<!-- <button class="layui-btn"
+							onclick="xadmin.open('添加供应商','./supplier-add.html',600,500)">
+							<i class="layui-icon"></i>添加
+						</button>
+						<div class="layui-inline layui-show-xs-block" style="float:right; margin-top:7px">
+								<input id="name" type="text" name="username" placeholder="请输入供应商名称"
+									autocomplete="off" class="layui-input" >
+							
+							
+								<button class="layui-btn" id="research" lay-submit="" lay-filter="sreach">
+									<i class="layui-icon">&#xe615;</i>
+								</button>
+							</div> -->
+						<button class="layui-btn"
+							onclick="xadmin.open('添加供应商','./supplier-add.html',600,500)">
+							<i class="layui-icon"></i>添加
+						</button>
+						<div class="layui-inline layui-show-xs-block" id="query"
+							style="float: right">
+							<button class="layui-btn" id="queryById" lay-submit=""
+								lay-filter="sreach">
+								<i class="layui-icon">&#xe615;</i>
+							</button>
+						</div>
+						<div class="layui-inline layui-show-xs-block"
+							style="float: right; margin-top: 7px;">
+							<input type="text" name="name" placeholder="请输入供应商名字" autocomplete="off" class="layui-input" id="searchNameId">
+						</div>
+					</div>
+					<div class="layui-card-body layui-table-body layui-table-main">
+						<table class="layui-table layui-form">
+							<thead>
+								<tr>
+									<!-- <th><input type="checkbox" lay-filter="checkall" name="" lay-skin="primary"></th> -->
+									<th>供应商编码</th>
+                                    <th>供应商名称</th>
+                                    <th>地址</th>
+                                    <th>联系人</th>
+                                    <th>联系方式</th>
+                                    <th>分类</th>
+                                    <th>备注</th>
+                                    <th>操作</th>
+								</tr>
+							</thead>
+							<tbody id="tbodyId">
+								<tr>
+									<td><input type="checkbox" name="" lay-skin="primary">
+									</td>
+									<td colspan="9">数据正在加载中...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="layui-card-body ">
+						<div class="page">
+							<div id="pageId">
+								<ul class="pagination pagination-sm no-margin pull-right">
+									<li><a class="first">首页</a></li>
+									<li><a class="pre">上一页</a></li>
+									<li><a class="next">下一页</a></li>
+									<li><a class="last">尾页</a></li>
+									<li><a class="rowCount">总记录数(0)</a></li>
+									<li><a class="pageCount">总页数(0)</a></li>
+									<li><a class="pageCurrent">当前页(1)</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+$(function(){
+	  doGetObjects();
+	  $("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+	  $("#tbodyId")
+	 /*  .on("click",".layui-btn-delete",doDeleteObject) */
+	  .on("click","#delete",doLoadEditUI) 
+	  
+	/*  $(".layui-card-header").on("click","#deleteAll1",doDeleteObjects)  */
+	 $(".layui-card-header").on("click","#research",doQueryObjects) 
+ });
+layui.use([ 'laydate', 'form' ], function() {
+		var laydate = layui.laydate;
+		var form = layui.form;
+
+		 // 监听全选
+		form.on('checkbox(checkall)', function(data) {
+
+			if (data.elem.checked) {
+				$('tbody input').prop('checked', true);
+			} else {
+				$('tbody input').prop('checked', false);
+			}
+			form.render('checkbox');
+		}); 
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#start' //指定元素
+		});
+
+		//执行一个laydate实例
+		laydate.render({
+			elem : '#end' //指定元素
+		});
+
+	});
+	function doHandleResponseResult (result){ //JsonResult
+		debugger
+		   if(result.state==1){//ok
+			   
+			//更新table中tbody内部的数据
+			doSetTableBodyRows(result.data.list);//将数据呈现在页面上 
+			//更新页面page.html分页数据
+			debugger
+			doSetPagination(result.data); //此方法写到page.html中
+		    }else{
+			alert(result.msg);
+		    }  
+	 }
+	function doSetTableBodyRows(records){
+		debugger
+		   //1.获取tbody对象，并清空对象
+		   var tBody=$("#tbodyId");
+		   tBody.empty();
+		   //2.迭代records记录，并将其内容追加到tbody
+		   for(var i in records){
+			   //2.1 构建tr对象
+			   var tr=$("<tr></tr>");
+			   tr.data("id",records[i].id);
+			   tr.data("name",records[i].name);
+			   tr.data("addr",records[i].addr);
+			   tr.data("contact",records[i].contact);
+			   tr.data("phone",records[i].phone);
+			   tr.data("cate",records[i].cate);
+			   tr.data("notes",records[i].notes);
+			   
+			   //2.2 构建tds对象
+			   var tds=doCreateTds(records[i]);
+			   
+			   //2.3 将tds追加到tr中
+			   tr.append(tds);
+			   //2.4 将tr追加到tbody中
+			   tBody.append(tr);
+		   }
+	   }
+	 function doCreateTds(data){
+		   var tds=/* "<td><input type='checkbox' name='id' value='"+data.id+"' lay-skin='primary'></td>"+ */
+		   "<td>"+data.id+"</td>"+
+		     "<td>"+data.name+"</td>"+
+		     "<td>"+data.addr+"</td>"+
+		     "<td>"+data.contact+"</td>"+
+		     "<td>"+data.phone+"</td>"+
+		     "<td>"+data.cate+"</td>"+
+		     "<td>"+data.notes+"</td>"+
+			     
+ 			   /*   "<td><a class='btn-delete'>删除</a>"+ 
+			     "&nbsp;&nbsp;&nbsp;&nbsp;<a class='btn-update'>修改</a></td>";	 */
+			  
+                "<td>"+
+				    "<button class='layui-btn layui-btn-upadate' id='delete'"+">"+"</i>修改</button>"+ 
+					/* "<button class='layui-btn layui-btn-danger layui-btn-delete' onclick="+"doDeleteObject"+">"
+					+"删除</button>"+  */
+				"</td>"
+                
+				
+	return tds;
+	   }
+	 
+	 function doLoadEditUI(){
+		 
+		  var title;
+		   if($(this).hasClass('btn-add')){
+			   title="添加供应商";
+			   doLoadPageUI(title);
+		   }else{ 
+			   title="修改供应商信息" 
+			   
+			   var name=$(this).parents("tr").data("name");
+			   var id=$(this).parents("tr").data("id");
+			   var addr=$(this).parents("tr").data("addr");
+			   var contact=$(this).parents("tr").data("contact");
+			   var phone=$(this).parents("tr").data("phone");
+			   var cate=$(this).parents("tr").data("cate");
+			   var notes=$(this).parents("tr").data("notes");
+			   var params={"name":name};
+			   console.log(id);
+			   console.log(name);
+			   localStorage.setItem("id",id);
+			   localStorage.setItem("name",name);
+			   localStorage.setItem("addr",addr);
+			   localStorage.setItem("contact",contact);
+			   localStorage.setItem("phone",phone);
+			   localStorage.setItem("cate",cate);
+			   localStorage.setItem("notes",notes);
+			   xadmin.open('修改供应商信息','./supplier-edit.html',600,500);
+			   var url="supplier/doUpdateObject";
+			   $.getJSON(url,params,function(result){
+				   if(result.state==1){
+					  result.data.id=id;//在结果中动态追加id
+					  $(".layui-col-md12").data("data",result.data);
+					 /*  doLoadPageUI(title); *///异步加载页面  
+				   }else{
+					  alert(result.message); 
+				   }
+			   });
+		   }
+	   }
+	 function doLoadPageUI(title){
+		 
+		   var url="supplier/supplier-edit"
+		   $("#mainContentId")
+		   .load(url,function(){
+			   $(".box-title").html(title);
+		   })
+	   }
+	 
+	 
+	/*  function doDeleteObject(){
+		 debugger
+		   //1.params
+		   var id=$(this).parents("tr").data("id");
+		   var params={"id":id};
+		   //2.url
+		   if (!confirm("确认删除吗?"))
+			return;
+		   var url="class/doDeleteObject"
+		   //3.ajax request
+		   $.post(url,params,function(result){
+			   if(result.state==1){
+				   alert(result.message);
+				   doSetPageCurrent();
+				   doGetObjects();
+			   }else{
+				   alert(result.message);
+			   }
+		   })
+		   
+	   }
+	 function doDeleteObjects() {
+		 debugger
+			//1.获取选中的id值
+			var ids = doGetCheckedIds();
+			if (ids.length == 0) {
+				alert("至少选择一个");
+				return;
+			}
+			if (!confirm("确认删除吗?"))
+				return;
+			//2.发异步请求执行删除操作
+			var url = "class/doDeleteObjects";
+			var params = {
+				"ids" : ids.toString()
+			};
+			console.log(params);
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					alert(result.message);
+					debugger
+					doSetPageCurrent();
+					doGetObjects();
+				} else {
+					alert(result.message);
+				}
+			});
+		} */
+	 function doGetCheckedIds() {
+			//定义一个数组,用于存储选中的checkbox的id值
+			var array = [];//new Array();
+			//获取tbody中所有类型为checkbox的input元素
+			$("#tbodyId input[type=checkbox]").
+			//迭代这些元素，每发现一个元素都会执行如下回调函数
+			each(function() {
+				//假如此元素的checked属性的值为true
+				if ($(this).prop("checked")) {
+					//调用数组对象的push方法将选中对象的值存储到数组
+					array.push($(this).val());
+				}
+			});
+			return array;
+		}
+	 function doGetObjects(){
+	//debugger
+		   //1.params
+		   //获取在Page.html中绑定的当前页码值
+		   var pageCurrent=$("#pageId").data("pageCurrent");
+		   //假如没有值,设置初始值为1
+		   if(!pageCurrent)pageCurrent=1;
+		   //var params="pageCurrrent="+pageCurrent;
+		   var params={"pageCurrent":pageCurrent};
+		   //获取查询时用户输入的名字
+		   var name=$("#name").val();
+		   if(name)params.name=name;
+		   //2.url
+		   var url="supplier/doFindPageObjects";
+		   //3.ajax request
+		   console.log(params);
+		   $.getJSON(url,params,function(result){
+	//debugger
+			   doHandleResponseResult(result);
+		   });
+	   }
+	 
+	 function doQueryObjects() {
+			//为什么要在此位置初始化pageCurrent的值为1?
+			//数据查询时页码的初始位置也应该是第一页
+			$("#pageId").data("pageCurrent", 1);
+			//为什么要调用doGetObjects函数？
+			//重用js代码，简化jS代码编写。
+			doGetObjects();
+		}
+	 
+	 function doJumpToPage() {
+	//debugger
+			//1.获取点击对象的class值
+			var cls = $(this).prop("class");//Property
+			//2.基于点击的对象执行pageCurrent值的修改
+			//2.1获取pageCurrent,pageCount的当前值
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			var pageCount = $("#pageId").data("pageCount");
+			//2.2修改pageCurrent的值
+			if (cls == "first") {//首页
+				pageCurrent = 1;
+			} else if (cls == "pre" && pageCurrent > 1) {//上一页
+				pageCurrent--;
+			} else if (cls == "next" && pageCurrent < pageCount) {//下一页
+				pageCurrent++;
+			} else if (cls == "last") {//最后一页
+				pageCurrent = pageCount;
+			} else {
+				return;
+			}
+			//3.对pageCurrent值进行重新绑定
+			$("#pageId").data("pageCurrent", pageCurrent);
+			//4.基于新的pageCurrent的值进行当前页数据查询
+			doGetObjects();
+		}
+	 
+	 function doSetPageCurrent() {
+			var pageCount = $("#pageId").data("pageCount");
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			var checked = $("#checkAll").prop("checked");
+			if (pageCurrent == pageCount && checked && pageCurrent > 1) {
+				pageCurrent--;
+				$("#pageId").data("pageCurrent", pageCurrent);
+			}
+		}
+	 
+	 function doSetPagination(page) {
+	//debugger
+			//1.初始化数据
+			$(".rowCount").html("总记录数(" + page.total + ")");
+			$(".pageCount").html("总页数(" + page.pages + ")");
+			$(".pageCurrent").html("当前页(" + page.pageNum + ")");
+			//2.绑定数据(为后续对此数据的使用提供服务)
+			$("#pageId").data("pageCurrent", page.pageNum);
+			$("#pageId").data("pageCount", page.pages);
+		}
+</script>
+</html>
