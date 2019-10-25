@@ -11,99 +11,116 @@
         <link rel="stylesheet" href="./css/xadmin.css">
         <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="./js/xadmin.js"></script>
-        <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-        <!--[if lt IE 9]>
-            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
     </head>
     <body>
         <div class="layui-fluid">
             <div class="layui-row">
                 <form class="layui-form">
+                
                     <div class="layui-form-item">
-                        <label for="L_email" class="layui-form-label">
+                        <label for="supplierId" class="layui-form-label">
                             <span class="x-red">*</span>供应商编码</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_email" name="email" required="" lay-verify="email" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="supplierId" name="supplierId" required="" lay-verify="id" autocomplete="off" class="layui-input"></div>
                         <!-- <div class="layui-form-mid layui-word-aux">
-                            <span class="x-red">*</span>将会成为您唯一的登入名</div> --></div>
+                            <span class="x-red">*</span>将会成为您唯一的登入名</div> -->
+                    </div>
+                    
                     <div class="layui-form-item">
-                        <label for="L_username" class="layui-form-label">
+                        <label for="supplierName" class="layui-form-label">
                             <span class="x-red">*</span>供应商名称</label>
                         <div class="layui-input-inline">
-                            <input type="text" id="L_username" name="username" required="" lay-verify="nikename" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="supplierName" name="supplierName" required="" lay-verify="name" autocomplete="off" class="layui-input">
+                        </div>
                     </div>
+                    
                     <div class="layui-form-item">
-                        <label for="L_pass" class="layui-form-label">
+                        <label for="supplierAddr" class="layui-form-label">
                             <span class="x-red">*</span>地址</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_pass" name="pass" required="" lay-verify="pass" autocomplete="off" class="layui-input"></div>
-                        <!-- <div class="layui-form-mid layui-word-aux">6到16个字符</div> --></div>
+                            <input type="text" id="supplierAddr" name="supplierAddr" required="" lay-verify="addr" autocomplete="off" class="layui-input"></div>
+                        <!-- <div class="layui-form-mid layui-word-aux">6到16个字符</div> -->
+                    </div>
+                    
                     <div class="layui-form-item">
-                        <label for="L_repass" class="layui-form-label">
+                        <label for="contact" class="layui-form-label">
                             <span class="x-red">*</span>联系人</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="contact" name="repass" required="" lay-verify="contact" autocomplete="off" class="layui-input"></div>
                     </div>
+                    
                     <div class="layui-form-item">
-                        <label for="L_repass" class="layui-form-label">
+                        <label for="phone" class="layui-form-label">
                             <span class="x-red">*</span>联系方式</label>
                         <div class="layui-input-inline">
-                            <input type="password" id="L_repass" name="repass" required="" lay-verify="repass" autocomplete="off" class="layui-input"></div>
+                            <input type="text" id="phone" name="phone" required="" lay-verify="phone" autocomplete="off" class="layui-input"></div>
                     </div>
+                    
                     <div class="layui-form-item">
-                        <label for="L_repass" class="layui-form-label"></label>
-                        <button class="layui-btn" lay-filter="add" lay-submit="">增加</button></div>
-                </form>
+                        <label for="cate" class="layui-form-label">
+                            <span class="x-red">*</span>类型</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="cate" name="cate" required="" lay-verify="cate" autocomplete="off" class="layui-input"></div>
+                    </div>
+
+				<div class="layui-form-item">
+					<label for="notes" class="layui-form-label"> <span
+						class="x-red">*</span>备注
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="notes" name="notes" required=""
+							lay-verify="notes" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label for="L_repass" class="layui-form-label"></label>
+					<button class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+				</div>
+			</form>
             </div>
         </div>
-        <script>layui.use(['form', 'layer','jquery'],
-            function() {
-                $ = layui.jquery;
-                var form = layui.form,
-                layer = layui.layer;
-
-                //自定义验证规则
-                form.verify({
-                    nikename: function(value) {
-                        if (value.length < 5) {
-                            return '昵称至少得5个字符啊';
-                        }
-                    },
-                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
-                    repass: function(value) {
-                        if ($('#L_pass').val() != $('#L_repass').val()) {
-                            return '两次密码不一致';
-                        }
-                    }
-                });
-
-                //监听提交
-                form.on('submit(add)',
-                function(data) {
-                    console.log(data);
-                    //发异步，把数据提交给php
-                    layer.alert("增加成功", {
-                        icon: 6
-                    },
-                    function() {
-                        //关闭当前frame
-                        xadmin.close();
-
-                        // 可以对父窗口进行刷新 
-                        xadmin.father_reload();
-                    });
-                    return false;
-                });
-
-            });</script>
-        <script>var _hmt = _hmt || []; (function() {
-                var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-                var s = document.getElementsByTagName("script")[0];
-                s.parentNode.insertBefore(hm, s);
-            })();</script>
+       <script type="text/javascript">
+		$(function() {
+			$(".layui-form-item").on("click", ".layui-btn", doSave)
+		});
+		//将表单数据发送到服务端
+		function doSave() {
+			//1.获取表单数据
+			var params = doGetEditFormData();
+			//2.定义url
+			var url = "supplier/doSaveObject";
+			debugger
+			//3.异步提交数据
+			$.post(url, params, function(result) {
+				if (result.state == 1) {
+					debugger
+					alert(result.message);
+					doCancel();
+				} else {
+					alert(result.message);
+				}
+			});
+		}
+		function doGetEditFormData() {
+			var params = {
+				id:$("#supplierId").val(),  /* 前者为数据库字段  后者为input文本框的id */ 
+				name : $("#supplierName").val(),
+				dddr : $("#supplierAddr").val(),
+				contact : $("#contact").val(),
+				phone : $("#phone").val(),
+				cate : $("#cate").val(),
+				notes : $("#notes").val()
+			}
+			return params;
+		}
+		function doCancel(){
+			debugger
+			var url="gym_coachGroup";
+			$("#layui-layer-shade1").load(url);  
+		  }
+	</script>
     </body>
 
 </html>

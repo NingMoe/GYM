@@ -1,9 +1,7 @@
 package com.gym.service;
 
-import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
+import com.github.pagehelper.PageInfo;
 import com.gym.pojo.Supplier;
 
 public interface SupplierService {
@@ -12,8 +10,9 @@ public interface SupplierService {
 	
 	int updateById(Supplier entity);
 
-	//List<Supplier> findAll();
-	List<Supplier> findAll();
-	
 	Integer selectCount();
+
+	PageInfo<Supplier> findPageObjects(String name, Integer pageCurrent);
+
+	Supplier findObjectByName(String name);
 }
