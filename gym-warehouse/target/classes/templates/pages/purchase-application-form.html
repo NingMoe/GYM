@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+<meta charset="UTF-8">
+<title>欢迎页面-X-admin2.2</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+<link rel="stylesheet" href="./css/font.css">
+<link rel="stylesheet" href="./css/xadmin.css">
+<script type="text/javascript" src="./lib/layui/layui.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+<script src="js/jquery.min.js"></script>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+            <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+            <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<form class="layui-form">
+				<label class="layui-form-label">供应商</label>
+				<div class="layui-input-inline">
+					<select name="city" lay-verify="" lay-search>
+						<option value="">请选择一个供应商</option>
+						<option value="010">北京</option>
+					</select>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_email" class="layui-form-label">采购商品名称</label>
+					<div class="layui-input-inline">
+						<select name="city" lay-verify="" lay-search>
+							<option value="">请选择一个商品</option>
+							<option value="010">北京</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top: -15px">
+					<label for="L_email" class="layui-form-label">采购商品类别</label>
+					<div class="layui-input-inline">
+						<select name="city" lay-verify="" lay-search>
+							<option value="">请选择一个类别</option>
+							<option value="010">北京</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top: -15px">
+					<label for="L_username" class="layui-form-label">数量</label>
+					<div class="layui-input-inline">
+						<input class="layui-input" onkeyup="value=value.replace(/\D/g,'')"
+							onafterpaste="value=value.replace(/\D/g,'')">
+					</div>
+				</div>
+				<div class="layui-form-item" style="margin-top: -15px">
+					<label for="L_username" class="layui-form-label">采购金额</label>
+					<div class="layui-input-inline">
+						<input class="layui-input"
+							onkeyup="value=value.replace(/[^\d.]/g,'')"
+							onafterpaste="value=value.replace(/[^\d.]/g,'')">
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text"
+					style="margin-top: -15px">
+					<label class="layui-form-label">备注</label>
+					<div class="layui-input-block">
+						<textarea name="desc" placeholder="请输入备注,可以不填"
+							class="layui-textarea"></textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_repass" class="layui-form-label"></label>
+					<button class="layui-btn" lay-filter="add" lay-submit="">发布</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		layui.use([ 'laydate', 'form' ], function() {
+			var laydate = layui.laydate;
+			var form = layui.form;
+			// 监听全选
+			form.on('checkbox(checkall)', function(data) {
+				if (data.elem.checked) {
+					$('tbody input').prop('checked', true);
+				} else {
+					$('tbody input').prop('checked', false);
+				}
+				form.render('checkbox');
+			});
+			//执行一个laydate实例
+			laydate.render({
+				elem : '#start' //指定元素
+			});
+			//执行一个laydate实例
+			laydate.render({
+				elem : '#end' //指定元素
+			});
+		});
+
+		$(function() {
+			doGetObjects();
+			$("#pageId").on("click", ".first,.pre,.next,.last", doJumpToPage);
+			$("#query").on("click", "#queryById", doQueryObjects);
+			$("#header").on("click", "#normal,#danger,#none", doSwitchQuery);
+			$("#header").on("click", "#primary", doSwitchState);
+			$("#tbodyId").on("click", "#operator", doSwitch);
+
+		})
+		function doSwitch() {
+			xadmin.open('采购申请表', './purchase-application-form.html', 600, 500);
+		}
+		function doSwitchState() {
+			debugger
+			var b = document.getElementById("primary");
+			b.value = 3;
+			doGetObjects();
+		}
+		function doSwitchQuery() {
+			debugger
+			var a = $(this).val();
+			var b = document.getElementById("primary");
+			b.value = a;
+			doGetObjects();
+		}
+		function doJumpToPage() {
+			debugger
+			//1.获取点击对象的class值
+			var cls = $(this).prop("class");//Property
+			//2.基于点击的对象执行pageCurrent值的修改
+			//2.1获取pageCurrent,pageCount的当前值
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			var pageCount = $("#pageId").data("pageCount");
+			//2.2修改pageCurrent的值
+			if (cls == "first") {//首页
+				pageCurrent = 1;
+			} else if (cls == "pre" && pageCurrent > 1) {//上一页
+				pageCurrent--;
+			} else if (cls == "next" && pageCurrent < pageCount) {//下一页
+				pageCurrent++;
+			} else if (cls == "last") {//最后一页
+				pageCurrent = pageCount;
+			} else {
+				return;
+			}
+			//3.对pageCurrent值进行重新绑定
+			$("#pageId").data("pageCurrent", pageCurrent);
+			//4.基于新的pageCurrent的值进行当前页数据查询
+			doGetObjects();
+		}
+		function doQueryObjects() {
+			debugger
+			//为什么要在此位置初始化pageCurrent的值为1?
+			//数据查询时页码的初始位置也应该是第一页
+			$("#pageId").data("pageCurrent", 1);
+			//为什么要调用doGetObjects函数？
+			//重用js代码，简化jS代码编写。
+			doGetObjects();
+		}
+		function doGetObjects() {
+			//debugger;//断点调试
+			//1.定义url和参数
+			debugger
+			var url = "manage/itemStatu"
+			var pageCurrent = $("#pageId").data("pageCurrent");
+			//为什么要执行如下语句的判定，然后初始化pageCurrent的值为1
+			//pageCurrent参数在没有赋值的情况下，默认初始值应该为1.
+			if (!pageCurrent)
+				pageCurrent = 1;
+			var params = {
+				"pageCurrent" : pageCurrent
+			};
+			var b = document.getElementById("primary");
+			var state = b.value;
+			params.state = state;
+			//pageCurrent=2
+			//为什么此位置要获取查询参数的值?
+			//一种冗余的应用方法，目的时让此函数在查询时可以重用。
+			var name = $("#searchNameId").val();
+			//如下语句的含义是什么？动态在js对象中添加key/value,
+			if (name)
+				params.name = name;//查询时需要
+			$.getJSON(url, params, function(result) {
+				debugger
+				//JsonResult->PageObject->List<SysLogs>+...
+				//请问result是一个字符串还是json格式的js对象？对象
+				doHandleResponseResult(result);
+			});//特殊的ajax函数
+		}
+		function doHandleResponseResult(result) { //JsonResult
+			debugger
+			if (result.status == 200) {//ok
+				//更新table中tbody内部的数据
+				if (result.data.list.length == 0) {
+					alert("没有符合条件的数据哦,回到初始页面咯");
+					location.reload();
+				}
+
+				doSetTableBodyRows(result.data.list);//将数据呈现在页面上 
+				//更新页面page.html分页数据
+				doSetPagination(result.data); //此方法写到page.html中
+			} else {
+				alert("没有找到对应记录");
+				var tBody = $("#tbodyId");
+				tBody.empty();
+				doSetPaginationS(result.data);
+			}
+		}
+		function doSetPaginationS(page) {
+			//1.初始化数据
+			$(".rowCount").html("总记录数(" + page.rowCount + ")");
+			$(".pageCount").html("总页数(" + page.pageCount + ")");
+			$(".pageCurrent").html("当前页(" + page.pageCurrent + ")");
+			//2.绑定数据(为后续对此数据的使用提供服务)
+			$("#pageId").data("pageCurrent", page.pageNum);
+			$("#pageId").data("pageCount", page.pages);
+		}
+		function doSetPagination(page) {
+			//1.初始化数据
+			$(".rowCount").html("总记录数(" + page.total + ")");
+			$(".pageCount").html("总页数(" + page.pages + ")");
+			$(".pageCurrent").html("当前页(" + page.pageNum + ")");
+			//2.绑定数据(为后续对此数据的使用提供服务)
+			$("#pageId").data("pageCurrent", page.pageNum);
+			$("#pageId").data("pageCount", page.pages);
+		}
+		function doSetTableBodyRows(records) {
+			//1.获取tbody对象，并清空对象
+			var tBody = $("#tbodyId");
+			tBody.empty();
+			//2.迭代records记录，并将其内容追加到tbody
+			for ( var i in records) {
+				//2.1 构建tr对象
+				var tr = $("<tr></tr>");
+				//2.2 构建tds对象
+				var tds = doCreateTds(records[i]);
+				//2.3 将tds追加到tr中
+				tr.append(tds);
+				//2.4 将tr追加到tbody中
+				tBody.append(tr);
+			}
+		}
+		function doCreateTds(data) {
+			var tds = "<td id='itemName'>"
+					+ data.itemName
+					+ "</td>"
+					+ "<td id='itemState'>"
+					+ data.itemState
+					+ "</td>"
+					+ "<td id='specifications'>"
+					+ data.specifications
+					+ "</td>"
+					+ "<td id='tecDirection'>"
+					+ data.itemNum
+					+ "</td>"
+					+ "<td id='stuNumber'>"
+					+ data.saveWareLocation
+					+ "</td>"
+					+ "<td id='tecNumber'>"
+					+ data.minItemNum
+					+ "</td>"
+					+ "<td id='lockCapacity'>"
+					+ data.lockCapacity
+					+ "</td>"
+					+ "<td id='state' class='td-status'>"
+					+ (data.state == 0 ? "<span class='layui-btn layui-btn-danger layui-btn-mini'>需要补货</span></td>"
+							: (data.state == 1 ? "<span class='layui-btn layui-btn-mini'>正常</span></td>"
+									: "<span class='layui-btn layui-btn-normal layui-btn-mini'>危险</span></td>"))
+					+ "<td>"
+					+ "<button class='layui-btn layui-btn-danger layui-btn-update' id='operator'>"
+					+ "发布采购申请表</button>" + "</td>";
+
+			return tds;
+		}
+	</script>
+	<!-- <script>
+		layui.use([ 'form', 'layer', 'jquery' ], function() {
+			$ = layui.jquery;
+			var form = layui.form, layer = layui.layer;
+
+			//自定义验证规则
+			form.verify({
+				nikename : function(value) {
+					if (value.length < 5) {
+						return '昵称至少得5个字符啊';
+					}
+				},
+				pass : [ /(.+){6,12}$/, '密码必须6到12位' ],
+				repass : function(value) {
+					if ($('#L_pass').val() != $('#L_repass').val()) {
+						return '两次密码不一致';
+					}
+				}
+			});
+
+			//监听提交
+			form.on('submit(add)', function(data) {
+				console.log(data);
+				//发异步，把数据提交给php
+				layer.alert("发布成功", {
+					icon : 6
+				}, function() {
+					//关闭当前frame
+					xadmin.close();
+
+					// 可以对父窗口进行刷新 
+					xadmin.father_reload();
+				});
+				return false;
+			});
+
+		});
+	</script>
+	<script>
+		var _hmt = _hmt || [];
+		(function() {
+			var hm = document.createElement("script");
+			hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(hm, s);
+		})();
+	</script> -->
+</body>
+
+</html>

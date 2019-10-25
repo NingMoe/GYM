@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gym.mapper.ManageMapper">
+	<select id="getRowCount" resultType="int">
+		select count(*)
+		<include refid="queryWhereId" />
+	</select>
+	<sql id="queryWhereId">
+		from itemwarestate
+		<where>
+			<if test="name!=null and name!=''">
+				<!-- 也许有条件也许没有条件，concat是mysql连接字符串的函数，模糊查询 -->
+				item_name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+</mapper>
