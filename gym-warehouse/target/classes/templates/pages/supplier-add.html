@@ -87,6 +87,7 @@
 		});
 		//将表单数据发送到服务端
 		function doSave() {
+			debugger
 			//1.获取表单数据
 			var params = doGetEditFormData();
 			//2.定义url
@@ -107,7 +108,7 @@
 			var params = {
 				id:$("#supplierId").val(),  /* 前者为数据库字段  后者为input文本框的id */ 
 				name : $("#supplierName").val(),
-				dddr : $("#supplierAddr").val(),
+				addr : $("#supplierAddr").val(),
 				contact : $("#contact").val(),
 				phone : $("#phone").val(),
 				cate : $("#cate").val(),

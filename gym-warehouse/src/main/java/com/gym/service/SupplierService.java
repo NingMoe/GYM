@@ -15,4 +15,6 @@ public interface SupplierService {
 	PageInfo<Supplier> findPageObjects(String name, Integer pageCurrent);
 
 	Supplier findObjectByName(String name);
+
+	Supplier findObjectById(Integer id);
 }

@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 @TableName("supplier")
 @Accessors(chain = true)
 @Data
-public class Supplier {
+public class Supplier extends BasePojo{
 
 	/**
 	 * 

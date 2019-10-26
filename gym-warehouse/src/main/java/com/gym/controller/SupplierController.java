@@ -23,10 +23,11 @@ public class SupplierController {
 		PageInfo<Supplier> pageObject = supplierService.findPageObjects(name, pageCurrent);
 		return new JsonResult(pageObject);
 	}
-	@RequestMapping("doFindObjectByName")
+	
+	@RequestMapping("doFindObjectById")
 	@ResponseBody
-	public JsonResult doFindObjectById(String name) {
-		Supplier object = supplierService.findObjectByName(name);
+	public JsonResult doFindObjectById(Integer id) {
+		Supplier object = supplierService.findObjectById(id);
 		return new JsonResult(object);
 	}
 	

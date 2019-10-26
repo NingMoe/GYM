@@ -116,32 +116,30 @@
     	
     	
     	function doGetObjects() {
-    		debugger
-    		$("#supplierId").val(localStorage.getItem('id'));	
-    		var a=document.getElementById("#supplierId");
-    		a.value=localStorage.getItem('id');
-    		debugger
+    	/* 	$("#supplierId").val(localStorage.getItem('id'));	 */
     		var id = localStorage.getItem('id');
-    		var name = localStorage.getItem('name');
+    	/* 	var name = localStorage.getItem('name');
     		var addr = localStorage.getItem('addr');
     		var contact = localStorage.getItem('contact');
     		var phone = localStorage.getItem('phone');
     		var cate = localStorage.getItem('cate');
-    		var notes = localStorage.getItem('notes');
-    		var url = "supplier/doUpdateObject"
+    		var notes = localStorage.getItem('notes');	 */
+    		var url = "supplier/doFindObjectById";
     		var params = {
-    			"id" : id,
-    			"name" : name,
-    			"addr" : addr,
-    			"contact" : contact,
-    			"phone" : phone,
-    			"cate" : cate,
-    			"notes" : notes,
-    		};
+        			"id" : id,
+        		/* 	"name" : name,
+        			"addr" : addr,
+        			"contact" : contact,
+        			"phone" : phone,
+        			"cate" : cate,
+        			"notes" : notes, */
+        		};
+    		
     		$.getJSON(url, params, function(result) {
     			doHandleResponseResult(result);
     		});
     	}
+    	
     	function doHandleResponseResult(result) {
     		if (result.state == 1) {
     			doInitEditFormData(result.data);
@@ -149,6 +147,7 @@
     			alert(result.message);
     		}
     	}
+    	
     	function doInitEditFormData(data) {
     		$("#supplierId").val(data.id);
     		$("#supplierName").val(data.name);
